@@ -144,7 +144,7 @@
         + '</section>';
       return h;
     }
-    var barLeft = t.author ? txt('文 / ' + t.author) : leaf('WECHAT · LONG READ');
+    var barLeft = t.author ? leaf(txt('文 / ' + t.author)) : leaf('WECHAT · LONG READ');
     return '<section style="background:#FFFFFF;border:1px solid ' + spec.c.border + ';border-radius:14px;margin:8px 0 26px;">'
       + '<section style="padding:22px 20px 18px;">'
       + '<section style="display:flex;align-items:center;justify-content:space-between;">'
@@ -414,7 +414,7 @@
       var tk = body[k];
       switch (tk.type) {
         case 'cover':
-          tk.keywords = keywords; tk.parts = parts;
+          tk.keywords = keywords; tk.parts = parts; tk.author = opt.author || '';
           coverHtml = buildCover(spec, tk);
           break;
         case 'section': bodyHtml.push(buildSectionTitle(spec, tk)); break;
@@ -447,8 +447,9 @@
       + out.join('\n') + '</section>';
   }
 
-  /* ---------------- 18 套主题 ----------------
-   * group: editorial 杂志编辑部（原创 v2）/ classic 经典复刻（gzh-design-skill）/ fresh 新锐系列
+  /* ---------------- 33 套主题 ----------------
+   * base library: editorial / classic / fresh（18 套）
+   * original library: motion（高级排版，蓝梦原创视觉 15 套）
    * classic 组的配色与下划线取自原版 theme-index.md，组件形态为参数化复刻。
    */
 
@@ -623,7 +624,7 @@
       c: { primary: '#57534E', deep: '#44403C', light: '#D6D3D1', tint: '#FAFAF9', ink: '#1C1917', text: '#44403C', sub: '#A8A29E', border: '#E7E5E4', accent: '#78716C', coverA: '#57534E', coverB: '#292524', codeBg: '#FAFAF9' }
     },
 
-    /* ---------- 动效系列（风格复刻自蓝梦 wechat-motion-layout-studio，自研参数化实现） ---------- */
+    /* ---------- 高级排版（蓝梦原创视觉，与 wechat-motion-layout-studio Production V6 资产配套） ---------- */
     {
       id: 'sepia-archive', name: '档案棕褐', en: 'ARCHIVE SEPIA', kickerZh: '档案手记', group: 'motion',
       desc: '复古档案 · 棕褐纸感',
@@ -633,7 +634,7 @@
       c: { primary: '#8B5B3E', deep: '#3A3028', light: '#E0C9A6', tint: '#FBF7EF', ink: '#3A3028', text: '#4A4038', sub: '#756658', border: '#E7DECF', accent: '#C79C68', coverA: '#8B5B3E', coverB: '#3A3028', codeBg: '#FBF7EF' }
     },
     {
-      id: 'blueprint', name: '工程蓝图', en: 'BLUEPRINT', kickerZh: '工程蓝图', group: 'motion',
+      id: 'blueprint', name: '蓝图网格', en: 'BLUEPRINT GRID', kickerZh: '技术图谱', group: 'motion',
       desc: '蓝图网格 · 砖红点缀',
       swatch: '#2F718C', radius: '6px',
       underline: 'border-bottom:2px solid #A9C6D4;font-weight:600;',
@@ -641,7 +642,7 @@
       c: { primary: '#2F718C', deep: '#16364A', light: '#C8D9E0', tint: '#F2F7F9', ink: '#16364A', text: '#33475A', sub: '#5D7480', border: '#D8E2E8', accent: '#B86157', coverA: '#2F718C', coverB: '#16364A', codeBg: '#16364A' }
     },
     {
-      id: 'botanical', name: '植物笔记', en: 'BOTANICAL', kickerZh: '自然观察', group: 'motion',
+      id: 'botanical', name: '植物手记', en: 'BOTANICAL NOTES', kickerZh: '自然观察', group: 'motion',
       desc: '橄榄绿 · 植物观察手记',
       swatch: '#627A45', radius: '10px',
       underline: 'border-bottom:2px solid #C4CFAF;font-weight:600;',
@@ -649,7 +650,7 @@
       c: { primary: '#627A45', deep: '#29352B', light: '#D2D9CC', tint: '#F7FAF5', ink: '#29352B', text: '#3D4A3E', sub: '#68766A', border: '#DCE3D5', accent: '#D2A66B', coverA: '#759054', coverB: '#3D4E35', codeBg: '#F7FAF5' }
     },
     {
-      id: 'citrus', name: '青柠报告', en: 'CITRUS REPORT', kickerZh: '轻测评', group: 'motion',
+      id: 'citrus', name: '柑橘报告', en: 'CITRUS REPORT', kickerZh: '数据复盘', group: 'motion',
       desc: '橄榄青柠 · 轻快测评',
       swatch: '#65731F', radius: '10px',
       underline: 'border-bottom:2px solid #C9D1A0;font-weight:600;',
@@ -657,7 +658,7 @@
       c: { primary: '#65731F', deep: '#3F4813', light: '#D2D7CD', tint: '#F8FAF1', ink: '#20241F', text: '#3A4038', sub: '#6D736A', border: '#E2E6D9', accent: '#C87945', coverA: '#7A8A2A', coverB: '#3F4813', codeBg: '#F8FAF1' }
     },
     {
-      id: 'coral-zine', name: '珊瑚志', en: 'CORAL ZINE', kickerZh: '独立杂志', group: 'motion',
+      id: 'coral-zine', name: '珊瑚杂志', en: 'CORAL ZINE', kickerZh: '独立杂志', group: 'motion',
       desc: '珊瑚粉红 · 独立杂志感',
       swatch: '#B95054', radius: '12px',
       underline: 'border-bottom:2px solid #ECC0B9;font-weight:600;',
@@ -674,7 +675,7 @@
       c: { primary: '#5FAE9E', deep: '#17242D', light: '#91A3A8', tint: '#F0F4F4', ink: '#101A22', text: '#26343C', sub: '#6E8288', border: '#D9E1E1', accent: '#C39A5E', coverA: '#17242D', coverB: '#30434D', codeBg: '#101A22' }
     },
     {
-      id: 'vermilion', name: '朱砂编辑部', en: 'EDITORIAL VERMILION', kickerZh: '深度评论', group: 'motion',
+      id: 'vermilion', name: '墨红社论', en: 'EDITORIAL VERMILION', kickerZh: '深度评论', group: 'motion',
       desc: '朱砂红 · 编辑部署评',
       swatch: '#B33A2B', radius: '6px',
       underline: 'border-bottom:2px solid #E7BBA9;font-weight:600;',
@@ -682,7 +683,7 @@
       c: { primary: '#B33A2B', deep: '#201F1D', light: '#E4C5B8', tint: '#FBFAF8', ink: '#201F1D', text: '#3A3835', sub: '#777168', border: '#E3DED6', accent: '#B33A2B', coverA: '#B33A2B', coverB: '#201F1D', codeBg: '#201F1D' }
     },
     {
-      id: 'mist-research', name: '雾感研究', en: 'MIST RESEARCH', kickerZh: '研究报告', group: 'motion',
+      id: 'mist-research', name: '雾蓝研究', en: 'MIST RESEARCH', kickerZh: '研究报告', group: 'motion',
       desc: '灰蓝雾感 · 冷静研究风',
       swatch: '#4F7489', radius: '10px',
       underline: 'border-bottom:2px solid #B8CCD6;font-weight:600;',
@@ -690,7 +691,7 @@
       c: { primary: '#4F7489', deep: '#263843', light: '#B8CCD6', tint: '#F5F8FA', ink: '#263843', text: '#3C4F5C', sub: '#5F717C', border: '#DFE7EB', accent: '#4F7489', coverA: '#6C8FA3', coverB: '#3E5A6B', codeBg: '#F5F8FA' }
     },
     {
-      id: 'mono-gold', name: '素金手记', en: 'MONO GOLD', kickerZh: '手记专栏', group: 'motion',
+      id: 'mono-gold', name: '黑金刊读', en: 'MONO GOLD JOURNAL', kickerZh: '专业长文', group: 'motion',
       desc: '暖金素纸 · 手记质感',
       swatch: '#87682F', radius: '6px',
       underline: 'border-bottom:2px solid #D8CCAE;font-weight:600;',
@@ -707,7 +708,7 @@
       c: { primary: '#B94A32', deep: '#1D1D1B', light: '#A9C8BC', tint: '#FFF8E8', ink: '#1D1D1B', text: '#3A3833', sub: '#55504A', border: '#D8D4CC', accent: '#A9C8BC', coverA: '#D95B3F', coverB: '#8F3823', codeBg: '#FFF8E8' }
     },
     {
-      id: 'night-editorial', name: '夜航评论', en: 'NIGHT EDITORIAL', kickerZh: '夜航评论', group: 'motion',
+      id: 'night-editorial', name: '暗夜编辑', en: 'NIGHT EDITORIAL', kickerZh: '趋势观察', group: 'motion',
       desc: '锈金夜色 · 深夜长评',
       swatch: '#B95833', radius: '6px',
       underline: 'border-bottom:2px solid #C6A85F;font-weight:600;',
@@ -715,7 +716,7 @@
       c: { primary: '#B95833', deep: '#26231F', light: '#D8D2CA', tint: '#FAF7F2', ink: '#26231F', text: '#45403A', sub: '#746F68', border: '#E5DFD6', accent: '#C6A85F', coverA: '#B95833', coverB: '#26231F', codeBg: '#26231F' }
     },
     {
-      id: 'rice-paper', name: '宣纸', en: 'RICE PAPER', kickerZh: '宣纸笔记', group: 'motion',
+      id: 'rice-paper', name: '稻纸朱砂', en: 'RICE PAPER', kickerZh: '传统文化', group: 'motion',
       desc: '宣纸朱砂 · 东方文人气',
       swatch: '#A64232', radius: '4px',
       underline: 'border-bottom:2px solid #C9B88F;font-weight:600;',
@@ -723,7 +724,7 @@
       c: { primary: '#A64232', deep: '#34312B', light: '#C9B88F', tint: '#FAF6EE', ink: '#34312B', text: '#4A463E', sub: '#736C60', border: '#E6DFD2', accent: '#A64232', coverA: '#A64232', coverB: '#34312B', codeBg: '#FAF6EE' }
     },
     {
-      id: 'soft-clay', name: '软陶', en: 'SOFT CLAY', kickerZh: '生活随笔', group: 'motion',
+      id: 'soft-clay', name: '柔和陶土', en: 'SOFT CLAY', kickerZh: '生活随笔', group: 'motion',
       desc: '陶土暖棕 · 温软生活流',
       swatch: '#9F5E45', radius: '14px',
       underline: 'border-bottom:2px solid #E0C0AC;font-weight:600;',
@@ -739,7 +740,7 @@
       c: { primary: '#3157A4', deep: '#1D1D1B', light: '#C8C7C2', tint: '#F7F7F5', ink: '#1D1D1B', text: '#3C3A36', sub: '#66645E', border: '#E2E1DC', accent: '#D0B85A', coverA: '#3157A4', coverB: '#1D1D1B', codeBg: '#F7F7F5' }
     },
     {
-      id: 'violet-studio', name: '紫罗兰工作室', en: 'VIOLET STUDIO', kickerZh: '工作室观察', group: 'motion',
+      id: 'violet-studio', name: '紫灰工作室', en: 'VIOLET STUDIO', kickerZh: '工作室观察', group: 'motion',
       desc: '灰紫陶橙 · 工作室观察',
       swatch: '#705B8C', radius: '10px',
       underline: 'border-bottom:2px solid #C9BEDA;font-weight:600;',
@@ -753,7 +754,13 @@
     { id: 'editorial', name: '杂志编辑部' },
     { id: 'classic', name: '经典复刻' },
     { id: 'fresh', name: '新锐系列' },
-    { id: 'motion', name: '动效系列' }
+    { id: 'motion', name: '高级排版' }
+  ];
+
+  /* 顶层资源域：基础主题与高级排版不得在选择器中混排。 */
+  var LIBRARIES = [
+    { id: 'base', name: '基础主题', shortName: '基础', en: 'BASIC THEMES', groups: ['editorial', 'classic', 'fresh'] },
+    { id: 'original', name: '高级排版', shortName: '高级排版', en: 'ADVANCED LAYOUTS', groups: ['motion'] }
   ];
 
   function getSpec(id) {
@@ -769,7 +776,22 @@
     inline: inline,
     SPECS: SPECS,
     GROUPS: GROUPS,
+    LIBRARIES: LIBRARIES,
     getSpec: getSpec,
-    render: render
+    render: render,
+    COMPONENTS: {
+      buildCover: buildCover,
+      buildSectionTitle: buildSectionTitle,
+      buildSubsection: buildSubsection,
+      buildQuote: buildQuote,
+      buildToc: buildToc,
+      buildPara: buildPara,
+      buildCode: buildCode,
+      buildImage: buildImage,
+      buildList: buildList,
+      buildTable: buildTable,
+      buildDivider: buildDivider,
+      buildSignature: buildSignature
+    }
   };
 });

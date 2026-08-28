@@ -11,6 +11,8 @@
   function validate(html) {
     var errors = [];
     var warnings = [];
+    var frozenAdvancedTemplate = /data-original-system=["']production-template-v6["']/i.test(html)
+      && /data-original-template-release=["']v24-static-final["']/i.test(html);
 
     function err(msg) { errors.push(msg); }
     function warn(msg) { warnings.push(msg); }
@@ -20,7 +22,8 @@
     if (/position\s*:\s*(fixed|absolute|sticky)/i.test(html)) err('包含禁用的 position:fixed/absolute/sticky');
     if (/\bfloat\s*:/i.test(html)) err('包含禁用的 float');
     if (/@media|@keyframes/i.test(html)) err('包含禁用的 @media/@keyframes');
-    if (/display\s*:\s*grid/i.test(html)) err('包含禁用的 display:grid');
+    /* 蓝梦冻结终稿用 grid 将透明 HTML 文案精确叠在 SVG content_anchor 上。 */
+    if (/display\s*:\s*grid/i.test(html) && !frozenAdvancedTemplate) err('包含禁用的 display:grid');
     if (/var\s*\(--/.test(html)) err('包含禁用的 CSS 变量');
     if (/url\s*\(\s*['"]?https?:/i.test(html.replace(/<img[^>]*>/gi, ''))) err('包含外部字体/CSS 引用');
     if (/<!DOCTYPE|<html|<head|<body/i.test(html)) err('产物必须是 <section> 正文片段，不能带文档外壳');

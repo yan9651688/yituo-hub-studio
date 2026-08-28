@@ -146,7 +146,7 @@ body {
 }
 
 /* ---------- 主题选择器（工具栏下拉） ---------- */
-.picker-slot { position: relative; display: inline-flex; }
+.picker-slot { position: relative; display: inline-flex; gap: 6px; }
 .picker-btn {
   display: inline-flex;
   align-items: center;
@@ -162,6 +162,17 @@ body {
   transition: border-color 0.25s;
 }
 .picker-btn:hover { border-color: var(--dark); }
+.picker-btn:focus-visible { outline: 2px solid rgba(29, 48, 69, 0.22); outline-offset: 2px; }
+.picker-btn.selected { background: var(--bg); border-color: #C8D2DC; }
+.picker-btn.open { border-color: var(--dark); background: #fff; }
+.picker-kind {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--sub2);
+}
+.picker-btn.selected .picker-kind { color: var(--sub); }
+.picker-count { font-size: 10.5px; font-weight: 500; color: var(--sub2); }
 .picker-btn .swatch {
   display: block;
   width: 12px;
@@ -240,6 +251,89 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* ---------- 蓝梦原创视觉等级（沿用现有胶囊与下拉语言） ---------- */
+.level-picker-slot { position: relative; display: inline-flex; }
+.level-picker-btn { max-width: 220px; }
+.level-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 25px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--dark);
+  color: #fff;
+  font-size: 9.5px;
+  letter-spacing: 0.05em;
+}
+.level-pop {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 82;
+  width: 420px;
+  max-width: 88vw;
+  padding: 14px 16px 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(29, 48, 69, 0.16);
+}
+.level-pop-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.level-list { display: grid; gap: 6px; }
+.level-option {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--dark);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.level-option:hover { border-color: #B9C6D2; }
+.level-option.active { border-color: var(--dark); background: var(--bg); }
+.level-no {
+  padding-top: 1px;
+  color: var(--sub);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.level-copy { display: flex; flex-direction: column; min-width: 0; }
+.level-copy strong { font-size: 12.5px; font-weight: 650; }
+.level-copy small { margin-top: 3px; color: var(--sub); font-size: 10.5px; line-height: 1.45; text-wrap: pretty; }
+.level-motion {
+  min-width: 22px;
+  padding: 3px 5px;
+  border-radius: 999px;
+  background: var(--dark);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+}
+.level-footnote {
+  margin: 10px 2px 0;
+  color: var(--sub2);
+  font-size: 9.5px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+.motion-mode-btn { min-width: 68px; }
 
 /* ---------- 动效组件库面板 ---------- */
 .motion-modal {
@@ -475,4 +569,12 @@ body {
   .topbar { padding: 12px 16px; }
   .hero-meta { display: none; }
   .pane { min-height: 320px; }
+}
+@media (max-width: 600px) {
+  .pane-toolbar { position: relative; }
+  .picker-slot { position: static; }
+  .level-picker-slot { position: static; }
+  .picker-pop { left: 16px; right: 16px; top: calc(100% + 6px); width: auto; max-width: none; }
+  .level-pop { left: 16px; right: 16px; top: calc(100% + 6px); width: auto; max-width: none; }
+  .pop-grid { grid-template-columns: 1fr; }
 }

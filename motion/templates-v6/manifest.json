@@ -1,0 +1,401 @@
+{
+  "schema_version": "production-template.motion.v6",
+  "status": "review-ready",
+  "source_static_release": "production-template.static-final.v24",
+  "count": 15,
+  "motion_policy": "V5 semantic motion retained; only Soft Clay title central arch geometry revised",
+  "flow_policy": "solid base at .34 opacity plus WSVG-006 trail at base width + 1px",
+  "compatibility": "conservative SMIL; no animated stroke-dasharray; no clipPath/mask/filter/foreignObject",
+  "templates": [
+    {
+      "style": "editorial-vermilion",
+      "name": "墨红社论",
+      "motion_file": "information-to-action_editorial-vermilion_motion-v6.html",
+      "static_file": "information-to-action_editorial-vermilion_motion-v6_static.html",
+      "motion_preview": "information-to-action_editorial-vermilion_motion-v6_preview.html",
+      "static_preview": "information-to-action_editorial-vermilion_motion-v6_static_preview.html",
+      "animation_count": 21,
+      "animation_roles": {
+        "title": 3,
+        "frame": 3,
+        "directory-decor": 2,
+        "section-title": 3,
+        "decor": 6,
+        "tail": 4
+      },
+      "motion_kinds": {
+        "sway": 10,
+        "flow": 11
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "bad3f5de7b6c03954c7a8c3e2d80a0288a8b92724423998bb0ff2d7356732a8a",
+      "static_sha256": "86c11252ad7a21924e7934417abf5012d0528ac80cba31e6c3ef8b21745e0287",
+      "motion_sha256": "f2f1b5108a43cb3194d99b9a24fc98e3bf4efdbdf1b6ec34ac9606bc2291fdf2",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "mono-gold-journal",
+      "name": "黑金刊读",
+      "motion_file": "information-to-action_mono-gold-journal_motion-v6.html",
+      "static_file": "information-to-action_mono-gold-journal_motion-v6_static.html",
+      "motion_preview": "information-to-action_mono-gold-journal_motion-v6_preview.html",
+      "static_preview": "information-to-action_mono-gold-journal_motion-v6_static_preview.html",
+      "animation_count": 19,
+      "animation_roles": {
+        "title": 3,
+        "frame": 3,
+        "directory-decor": 2,
+        "section-title": 3,
+        "decor": 6,
+        "tail": 2
+      },
+      "motion_kinds": {
+        "sway": 9,
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "34f26cbe22dc225fd86eb562da5a66cead671103f12d25cd918037275b3cf4d8",
+      "static_sha256": "27b1ba1adae8f236fbf403cfbfc0b8fdbd012e6fcb0c4dba207f1a69fa947f54",
+      "motion_sha256": "8aa72a3588c44d4f4a9b31c1d5c8dc6910ec0eefbee718f9d8dd3e2dc9a36d33",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "coral-zine",
+      "name": "珊瑚杂志",
+      "motion_file": "information-to-action_coral-zine_motion-v6.html",
+      "static_file": "information-to-action_coral-zine_motion-v6_static.html",
+      "motion_preview": "information-to-action_coral-zine_motion-v6_preview.html",
+      "static_preview": "information-to-action_coral-zine_motion-v6_static_preview.html",
+      "animation_count": 10,
+      "animation_roles": {
+        "title": 1,
+        "frame": 1,
+        "directory-decor": 1,
+        "section-title": 3,
+        "decor": 3,
+        "tail": 1
+      },
+      "motion_kinds": {
+        "flow": 7,
+        "pulse": 3
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "d55a6f0cb24020f8ca4e4b3edb2cfe4cf87e6e18347e5bc0834b99aa0759ed7b",
+      "static_sha256": "7a289a63b34ba3f9817b31ee6b2415ce3ed5b3869d716929119336ace61f2fe9",
+      "motion_sha256": "ae855a9b67bab825ce50848800d3a9160fac0923e933d6fb1739c67e593b141a",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "swiss-signal",
+      "name": "瑞士信号",
+      "motion_file": "information-to-action_swiss-signal_motion-v6.html",
+      "static_file": "information-to-action_swiss-signal_motion-v6_static.html",
+      "motion_preview": "information-to-action_swiss-signal_motion-v6_preview.html",
+      "static_preview": "information-to-action_swiss-signal_motion-v6_static_preview.html",
+      "animation_count": 20,
+      "animation_roles": {
+        "title": 3,
+        "frame": 3,
+        "directory-decor": 2,
+        "section-title": 3,
+        "decor": 6,
+        "tail": 3
+      },
+      "motion_kinds": {
+        "rotate": 10,
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "aaa10d1542fe2873da75c058f1fa83e8fdf073d94f50a7b6ed8e83cd9216a529",
+      "static_sha256": "0f6c9bed587eaab3c161e6d241a5fb733a23ba90bd27d7ba9eaf5b4562a35075",
+      "motion_sha256": "94bd006915b5b78d391514d6ad6eaf1ff3e7c7fd6c7845a751efe3a49502a6c4",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "citrus-report",
+      "name": "柑橘报告",
+      "motion_file": "information-to-action_citrus-report_motion-v6.html",
+      "static_file": "information-to-action_citrus-report_motion-v6_static.html",
+      "motion_preview": "information-to-action_citrus-report_motion-v6_preview.html",
+      "static_preview": "information-to-action_citrus-report_motion-v6_static_preview.html",
+      "animation_count": 22,
+      "animation_roles": {
+        "title": 3,
+        "frame": 3,
+        "directory-decor": 2,
+        "section-title": 6,
+        "decor": 6,
+        "tail": 2
+      },
+      "motion_kinds": {
+        "rotate": 12,
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "6e33669b4b84ee4ae774deb9ec3713e27842ac58d35075c904c0284f5fde8a3d",
+      "static_sha256": "9b8d4bc2a78cbd707fcde3cbfc108756d95dffe744754c4b904af206eb44b2e8",
+      "motion_sha256": "6da8b3ff3ec20c00a7b4f907b90ac11700e49e257dc9ad435a8373feb08b04af",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "blueprint-grid",
+      "name": "蓝图网格",
+      "motion_file": "information-to-action_blueprint-grid_motion-v6.html",
+      "static_file": "information-to-action_blueprint-grid_motion-v6_static.html",
+      "motion_preview": "information-to-action_blueprint-grid_motion-v6_preview.html",
+      "static_preview": "information-to-action_blueprint-grid_motion-v6_static_preview.html",
+      "animation_count": 22,
+      "animation_roles": {
+        "title": 3,
+        "frame": 3,
+        "directory-decor": 2,
+        "section-title": 6,
+        "decor": 6,
+        "tail": 2
+      },
+      "motion_kinds": {
+        "rotate": 12,
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "8770bc27b1a6d5471b7d657ffc4127a2fde8469c766ea432d89cd12c512600c0",
+      "static_sha256": "3a433ba1c2a7fe84554ff7ecebe70f2f7629592d569bbd14d251165caf1daf39",
+      "motion_sha256": "af23286aa119faa53c4cbfece9e8c4b8d2f754a0333b674d28b09d6a87f2575d",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "rice-paper",
+      "name": "稻纸朱砂",
+      "motion_file": "information-to-action_rice-paper_motion-v6.html",
+      "static_file": "information-to-action_rice-paper_motion-v6_static.html",
+      "motion_preview": "information-to-action_rice-paper_motion-v6_preview.html",
+      "static_preview": "information-to-action_rice-paper_motion-v6_static_preview.html",
+      "animation_count": 10,
+      "animation_roles": {
+        "title": 1,
+        "frame": 1,
+        "directory-decor": 1,
+        "section-title": 3,
+        "decor": 3,
+        "tail": 1
+      },
+      "motion_kinds": {
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "31ba0131a635baf03ed7fcf5c62dfaee9bc8de0f94b9ba2f373a22c14a98bb15",
+      "static_sha256": "934a3324192e3dfdb80933c49e7bba5af802db7f156da25d92b5b9134f35a881",
+      "motion_sha256": "e4222e01cfc49fda555f2ec60db2369bbcf9986ac5edc385d543821841e9bd34",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "botanical-notes",
+      "name": "植物手记",
+      "motion_file": "information-to-action_botanical-notes_motion-v6.html",
+      "static_file": "information-to-action_botanical-notes_motion-v6_static.html",
+      "motion_preview": "information-to-action_botanical-notes_motion-v6_preview.html",
+      "static_preview": "information-to-action_botanical-notes_motion-v6_static_preview.html",
+      "animation_count": 25,
+      "animation_roles": {
+        "title": 3,
+        "frame": 3,
+        "directory-decor": 2,
+        "section-title": 6,
+        "decor": 6,
+        "tail": 5
+      },
+      "motion_kinds": {
+        "sway": 15,
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "6449c808dd09c9189b587021c331d5bcc21f9431cb783ae2f7bdca28c789a81b",
+      "static_sha256": "07c496d0fd394e495276fcc377d1cb59677848d9d028f4366e03544af07424a0",
+      "motion_sha256": "365f8757ffcea2986fe89e956e6d66e254725fcc6eb81ccc866dc1cfa5790b1e",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "soft-clay",
+      "name": "柔和陶土",
+      "motion_file": "information-to-action_soft-clay_motion-v6.html",
+      "static_file": "information-to-action_soft-clay_motion-v6_static.html",
+      "motion_preview": "information-to-action_soft-clay_motion-v6_preview.html",
+      "static_preview": "information-to-action_soft-clay_motion-v6_static_preview.html",
+      "animation_count": 10,
+      "animation_roles": {
+        "title": 1,
+        "frame": 1,
+        "directory-decor": 1,
+        "section-title": 3,
+        "decor": 3,
+        "tail": 1
+      },
+      "motion_kinds": {
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "565e4282977d0fd285dab875ded36abffc3f9dbb506a325117dbbaa81f21d133",
+      "static_sha256": "547905e4836524faeec1d276c184468e81a20032cb958412e7f426beaa7b1568",
+      "motion_sha256": "124c739440fd32f3802dfe41e25630b800d6ef33b2d0116f2df0de39d11b9261",
+      "visual_delta_from_v5": "central title U-arches opened around editable title safe area; all perimeter and bottom geometry locked"
+    },
+    {
+      "style": "deep-sea-terminal",
+      "name": "深海终端",
+      "motion_file": "information-to-action_deep-sea-terminal_motion-v6.html",
+      "static_file": "information-to-action_deep-sea-terminal_motion-v6_static.html",
+      "motion_preview": "information-to-action_deep-sea-terminal_motion-v6_preview.html",
+      "static_preview": "information-to-action_deep-sea-terminal_motion-v6_static_preview.html",
+      "animation_count": 30,
+      "animation_roles": {
+        "title": 5,
+        "frame": 5,
+        "directory-decor": 3,
+        "section-title": 3,
+        "decor": 9,
+        "tail": 5
+      },
+      "motion_kinds": {
+        "rotate": 9,
+        "sway": 10,
+        "flow": 7,
+        "pulse": 3,
+        "swim": 1
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "cb19ccb85c7ab2775261ffe4ee531af6783b3eb1848f96175b02d55737db018c",
+      "static_sha256": "8045911ba5e635c099c33af6ad8fb6885d305279e6a504df390d6f12706017ac",
+      "motion_sha256": "3d72c59f31848946676e17121a7e809f1dd34b533623e9464fe99e412309b900",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "mist-research",
+      "name": "雾蓝研究",
+      "motion_file": "information-to-action_mist-research_motion-v6.html",
+      "static_file": "information-to-action_mist-research_motion-v6_static.html",
+      "motion_preview": "information-to-action_mist-research_motion-v6_preview.html",
+      "static_preview": "information-to-action_mist-research_motion-v6_static_preview.html",
+      "animation_count": 10,
+      "animation_roles": {
+        "title": 1,
+        "frame": 1,
+        "directory-decor": 1,
+        "section-title": 3,
+        "decor": 3,
+        "tail": 1
+      },
+      "motion_kinds": {
+        "pulse": 5,
+        "flow": 5
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "e7e76c6bf80607a5ca9f5e557f0cad8de1e3afe43758c9047e0a2eec49bccd3a",
+      "static_sha256": "2a6592b096692499ce9247e27b1ac79a06ce4e4e12ba44308626ed23ba96b714",
+      "motion_sha256": "2006dc24a3bb6e36d38b8f95c0c72f103aa077a2469927810920ab179425084e",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "violet-studio",
+      "name": "紫灰工作室",
+      "motion_file": "information-to-action_violet-studio_motion-v6.html",
+      "static_file": "information-to-action_violet-studio_motion-v6_static.html",
+      "motion_preview": "information-to-action_violet-studio_motion-v6_preview.html",
+      "static_preview": "information-to-action_violet-studio_motion-v6_static_preview.html",
+      "animation_count": 19,
+      "animation_roles": {
+        "title": 2,
+        "frame": 1,
+        "directory-decor": 2,
+        "section-title": 6,
+        "decor": 6,
+        "tail": 2
+      },
+      "motion_kinds": {
+        "rotate": 9,
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "71198bb09438b75af5da29f3d19c182f64850ab1d6738dbd15af8c0253af46bc",
+      "static_sha256": "a7324dd837f09231368cb0eb9baaee8debddd2b7f76f8595d48c6dc240c7eaff",
+      "motion_sha256": "250e3487b8eca8aa8c32ed4bdcaaa878cfd5741fce4e76b10478e9451fe469fc",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "neo-brutal",
+      "name": "新粗野",
+      "motion_file": "information-to-action_neo-brutal_motion-v6.html",
+      "static_file": "information-to-action_neo-brutal_motion-v6_static.html",
+      "motion_preview": "information-to-action_neo-brutal_motion-v6_preview.html",
+      "static_preview": "information-to-action_neo-brutal_motion-v6_static_preview.html",
+      "animation_count": 7,
+      "animation_roles": {
+        "title": 1,
+        "frame": 1,
+        "directory-decor": 1,
+        "decor": 3,
+        "tail": 1
+      },
+      "motion_kinds": {
+        "flow": 7
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "c6bbb615260c165f621ab8e07dea2a4ebbe7e5759f9be27129a538f4c702a898",
+      "static_sha256": "f5c05c34bcb32f4cbe190ee479d07a5f5b3b5b9d3c18fc6244bc13420651c265",
+      "motion_sha256": "c17f3ea2a76ecd50b6c76c6060368a5c825e3de2795c6123b4f81845f5e5cd21",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "night-editorial",
+      "name": "暗夜编辑",
+      "motion_file": "information-to-action_night-editorial_motion-v6.html",
+      "static_file": "information-to-action_night-editorial_motion-v6_static.html",
+      "motion_preview": "information-to-action_night-editorial_motion-v6_preview.html",
+      "static_preview": "information-to-action_night-editorial_motion-v6_static_preview.html",
+      "animation_count": 18,
+      "animation_roles": {
+        "title": 1,
+        "frame": 2,
+        "directory-decor": 2,
+        "section-title": 6,
+        "decor": 6,
+        "tail": 1
+      },
+      "motion_kinds": {
+        "flow": 10,
+        "rotate": 8
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "b5d9480053c6206903d9e6e3e4f9e29877ece744395948c79d09e365cef33fcb",
+      "static_sha256": "fa16e00e2866f630200851057f2ba51aebc1a52db623bf6a78f83b1fa6aadd26",
+      "motion_sha256": "020be2973cd294c5d306fd93064bc9cfe4ef2ee7000a97109ce305e833a282d8",
+      "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "archive-sepia",
+      "name": "档案棕褐",
+      "motion_file": "information-to-action_archive-sepia_motion-v6.html",
+      "static_file": "information-to-action_archive-sepia_motion-v6_static.html",
+      "motion_preview": "information-to-action_archive-sepia_motion-v6_preview.html",
+      "static_preview": "information-to-action_archive-sepia_motion-v6_static_preview.html",
+      "animation_count": 10,
+      "animation_roles": {
+        "title": 1,
+        "frame": 1,
+        "directory-decor": 1,
+        "section-title": 3,
+        "decor": 3,
+        "tail": 1
+      },
+      "motion_kinds": {
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "source_v24_sha256": "5a97c75d3dc5943bdf3019b070107a871053e73019fc09753dbb9067c3cfee1a",
+      "static_sha256": "411b6f7d1c101c9094738cbf129dab42af1508368f83e31e714a07a1c875025a",
+      "motion_sha256": "169179f5702a885d595882955bad44ae2dafb8b0f35bb26f40bd51bbea10c580",
+      "visual_delta_from_v5": "none"
+    }
+  ],
+  "source_motion_release": "production-template.motion.v5",
+  "soft_clay_scope_lock": "perimeter ornaments and bottom paths unchanged from V5"
+}

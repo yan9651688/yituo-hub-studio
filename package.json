@@ -1,0 +1,18 @@
+{
+  "name": "yituo-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Yi Tuo Hub 公众号排版工坊",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "test": "node test.js",
+    "check": "node --check app.js && node --check converter.js && node --check themes.js && node --check original-visuals-data.js && node --check original-visuals.js && node --check validator.js && node test.js",
+    "serve": "python -m http.server 8123"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
+  },
+  "devDependencies": {
+    "jsdom": "29.1.1"
+  }
+}
