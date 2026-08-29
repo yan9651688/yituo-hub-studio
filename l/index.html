@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+  <title>正在跳转</title>
+  <style>
+    html,body{height:100%;margin:0;background:#fff8f5;color:#142f35;font:16px/1.65 system-ui,-apple-system,"Segoe UI","PingFang SC",sans-serif}
+    body{display:grid;place-items:center}
+    main{width:min(82vw,24rem);padding:2rem;border:1px solid #eadbd5;border-radius:1.25rem;background:#fff;box-shadow:0 1rem 3rem rgba(31,39,48,.08);text-align:center}
+    .mark{width:2.75rem;height:2.75rem;margin:0 auto 1rem;border:.55rem solid #0b5557;box-shadow:inset 0 0 0 .5rem #f7e8e1;background:#17172c}
+    h1{margin:0 0 .5rem;font-size:1.15rem}
+    p{margin:.25rem 0;color:#68777b;font-size:.9rem}
+    a{display:inline-block;margin-top:1rem;color:#0b5557;font-weight:650}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark" aria-hidden="true"></div>
+    <h1>正在打开联系方式</h1>
+    <p id="status" aria-live="polite">请稍候，正在安全跳转…</p>
+    <a id="continue-link" href="#" hidden rel="noreferrer">继续打开</a>
+  </main>
+  <script src="redirect.js"></script>
+</body>
+</html>

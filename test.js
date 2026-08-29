@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const vm = require('vm');
 const { JSDOM } = require('jsdom');
 
 const dom = new JSDOM('<!doctype html><html><body></body></html>');
@@ -550,6 +551,99 @@ console.log('original-visuals ' + (combinationOk ? 'PASS' : 'FAIL')
   + ' combinations=' + originalCombinations + ' dynamicPairs=' + dynamicPairs
   + ' failures=' + originalFailures);
 if (!combinationOk) fail = true;
+
+/* 艺术二维码使用固定同域短链；禁止把它变成可由查询参数控制的开放跳转。 */
+const shortlinkIndex = fs.readFileSync(path.join(__dirname, 'l', 'index.html'), 'utf8');
+const shortlinkScript = fs.readFileSync(path.join(__dirname, 'l', 'redirect.js'), 'utf8');
+const readmeSource = fs.readFileSync(path.join(__dirname, 'README.md'), 'utf8');
+const dockerfile = fs.readFileSync(path.join(__dirname, 'Dockerfile'), 'utf8');
+const dockerNginx = fs.readFileSync(path.join(__dirname, 'nginx.conf'), 'utf8');
+const serverNginx = fs.readFileSync(path.join(__dirname, 'deploy', 'nginx-yituo-hub.conf'), 'utf8');
+const encodedTargetMatch = shortlinkScript.match(/const encodedTarget = "([A-Za-z0-9+/=]+)";/);
+let shortlinkTarget = null;
+try {
+  shortlinkTarget = encodedTargetMatch
+    ? new URL(Buffer.from(encodedTargetMatch[1], 'base64').toString('utf8'))
+    : null;
+} catch (_error) {
+  shortlinkTarget = null;
+}
+
+function executeShortlink(source) {
+  const elements = {
+    status: { textContent: 'pending' },
+    'continue-link': { href: '#', hidden: true }
+  };
+  let replaced = null;
+  const sandbox = {
+    Uint8Array,
+    TextDecoder,
+    URL,
+    atob: function (value) { return Buffer.from(value, 'base64').toString('binary'); },
+    document: {
+      getElementById: function (id) { return elements[id]; }
+    },
+    window: {
+      location: {
+        search: '?next=https://attacker.invalid/',
+        hash: '#https://attacker.invalid/',
+        replace: function (value) { replaced = value; }
+      }
+    }
+  };
+  vm.runInNewContext(source, sandbox, { timeout: 1000 });
+  return { elements, replaced };
+}
+
+let shortlinkRuntimeOk = false;
+try {
+  const liveRun = executeShortlink(shortlinkScript);
+  const rejectedTarget = Buffer.from('https://attacker.invalid/', 'utf8').toString('base64');
+  const rejectedRun = executeShortlink(
+    shortlinkScript.replace(encodedTargetMatch[1], rejectedTarget)
+  );
+  const runtimeTarget = new URL(liveRun.replaced);
+  shortlinkRuntimeOk = runtimeTarget.protocol === 'https:'
+    && runtimeTarget.hostname === 'u.wechat.com'
+    && liveRun.elements['continue-link'].hidden === false
+    && rejectedRun.replaced === null
+    && /校验失败/.test(rejectedRun.elements.status.textContent);
+} catch (_error) {
+  shortlinkRuntimeOk = false;
+}
+const shortlinkOk = shortlinkTarget
+  && shortlinkTarget.protocol === 'https:'
+  && shortlinkTarget.hostname === 'u.wechat.com'
+  && shortlinkRuntimeOk
+  && /Content-Security-Policy[^>]+default-src 'none'/.test(shortlinkIndex)
+  && /<script src="redirect\.js"><\/script>/.test(shortlinkIndex)
+  && /window\.location\.replace\(url\.href\)/.test(shortlinkScript)
+  && !/location\.(?:search|hash)/.test(shortlinkScript)
+  && /COPY l \/usr\/share\/nginx\/html\/l\//.test(dockerfile)
+  && [dockerNginx, serverNginx].every(function (source) {
+    return /location = \/l\s*{\s*return 302 \/l\/;\s*}/.test(source)
+      && /location \^~ \/l\/\s*{[\s\S]*?Cache-Control "no-store" always/.test(source)
+      && /X-Robots-Tag "noindex, nofollow, noarchive" always/.test(source)
+      && /X-Content-Type-Options "nosniff" always/.test(source)
+      && /Referrer-Policy "no-referrer" always/.test(source)
+      && /X-Frame-Options "DENY" always/.test(source)
+      && /Content-Security-Policy "[^"]*frame-ancestors 'none'[^"]*" always/.test(source);
+  });
+console.log('lanmeng-shortlink-route ' + (shortlinkOk ? 'PASS' : 'FAIL')
+  + ' fixed-host=' + (shortlinkTarget ? shortlinkTarget.hostname : 'invalid')
+  + ' runtime=' + shortlinkRuntimeOk);
+if (!shortlinkOk) fail = true;
+
+/* 两位作者的二维码必须保持一一对应；蓝梦成品用真机验收后的固定哈希。 */
+const lanmengQrPath = path.join(__dirname, 'assets', 'qr-lanmeng-art-castle-v1.png');
+const lanmengQrHash = crypto.createHash('sha256').update(fs.readFileSync(lanmengQrPath)).digest('hex');
+const authorQrOk = /assets\/qr-yan\.jpg[\s\S]{0,240}<b>颜<\/b>/.test(readmeSource)
+  && /assets\/qr-lanmeng-art-castle-v1\.png[\s\S]{0,240}<b>蓝梦<\/b>/.test(readmeSource)
+  && !/assets\/qr-lanmeng\.jpg/.test(readmeSource)
+  && lanmengQrHash === '557d6c20776c151ceeae5dc35a0b45e9b2b68ffebbe6cf3faa131383f5f343d2';
+console.log('author-qr-assets ' + (authorQrOk ? 'PASS' : 'FAIL')
+  + ' lanmeng-sha256=' + lanmengQrHash.slice(0, 12));
+if (!authorQrOk) fail = true;
 
 /* 148 个 SVG 必须保持保守子集，禁止可执行/引用型特性。 */
 let unsafeSvg = 0;
