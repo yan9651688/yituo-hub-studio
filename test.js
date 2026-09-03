@@ -57,6 +57,17 @@ const localServeHintOk = appSource.indexOf('http://127.0.0.1:8123/studio.html') 
 console.log('local-file-resource-hint ' + (localServeHintOk ? 'PASS' : 'FAIL'));
 if (!localServeHintOk) fail = true;
 
+const imageExportOk = studioDoc.querySelector('#btnDownload + #btnExportImage')
+  && studioDoc.querySelector('script[src="vendor/html2canvas.min.js"]')
+  && fs.existsSync(path.join(__dirname, 'vendor', 'html2canvas.min.js'))
+  && appSource.indexOf('function exportLongImage()') !== -1
+  && appSource.indexOf('window.html2canvas(target') !== -1
+  && appSource.indexOf('useCORS: true') !== -1
+  && appSource.indexOf('preferredScale = 3') !== -1
+  && appSource.indexOf('maxCanvasSide = 16384') !== -1;
+console.log('offline-long-image-export ' + (imageExportOk ? 'PASS' : 'FAIL'));
+if (!imageExportOk) fail = true;
+
 const baseLibrary = Themes.LIBRARIES.find(function (library) { return library.id === 'base'; });
 const originalLibrary = Themes.LIBRARIES.find(function (library) { return library.id === 'original'; });
 const baseThemeCount = Themes.SPECS.filter(function (spec) { return baseLibrary.groups.includes(spec.group); }).length;

@@ -96,6 +96,7 @@ body {
 .btn.primary:hover { background: var(--dark-2); transform: translateY(-1px); }
 .btn.ghost { background: transparent; border-color: var(--line); color: var(--ink); }
 .btn.ghost:hover { border-color: var(--dark); }
+.btn:disabled { cursor: wait; opacity: 0.62; }
 .btn.tiny { padding: 5px 12px; font-size: 11.5px; }
 .btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
 .btn.icon-round {
@@ -667,6 +668,7 @@ body {
     white-space: nowrap;
   }
   .actions .btn.icon-round { width: 40px; min-width: 40px; height: 40px; padding: 0; }
+  .actions #btnExportImage { grid-column: 1 / -1; width: 100%; }
   .actions #btnCopy { grid-column: 1 / -1; width: 100%; }
   .workspace { padding-right: 10px; padding-left: 10px; }
   .pane { min-width: 0; }
