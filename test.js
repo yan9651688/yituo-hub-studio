@@ -20,6 +20,7 @@ let fail = false;
 const studioSource = fs.readFileSync(path.join(__dirname, 'studio.html'), 'utf8');
 const appSource = fs.readFileSync(path.join(__dirname, 'app.js'), 'utf8');
 const stylesSource = fs.readFileSync(path.join(__dirname, 'styles.css'), 'utf8');
+const releaseNotesSource = fs.readFileSync(path.join(__dirname, 'release-notes.js'), 'utf8');
 const studioDoc = new JSDOM(studioSource).window.document;
 const previewWidths = Array.from(studioDoc.querySelectorAll('[data-preview-width]'), function (button) {
   return button.getAttribute('data-preview-width');
@@ -799,6 +800,17 @@ const colorwayUiOk = studioDoc.getElementById('colorPickerSlot')
   && stylesSource.indexOf('.color-pop') !== -1;
 console.log('colorway-ui ' + (colorwayUiOk ? 'PASS' : 'FAIL'));
 if (!colorwayUiOk) fail = true;
+
+/* 更新通知：铃铛入口、首访自动弹窗与版本记录必须就位。 */
+const releaseNotesUiOk = studioSource.indexOf('<script src="release-notes.js"></script>') !== -1
+  && releaseNotesSource.indexOf('global.Md2GZHReleaseNotes') !== -1
+  && releaseNotesSource.indexOf('RELEASES = [') !== -1
+  && releaseNotesSource.indexOf('yituo-hub.release-seen') !== -1
+  && releaseNotesSource.indexOf("document.getElementById('btnCopy')") !== -1
+  && stylesSource.indexOf('.release-modal') !== -1
+  && stylesSource.indexOf('.release-bell') !== -1;
+console.log('release-notes-ui ' + (releaseNotesUiOk ? 'PASS' : 'FAIL'));
+if (!releaseNotesUiOk) fail = true;
 
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

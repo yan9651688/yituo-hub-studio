@@ -632,6 +632,75 @@ body {
   box-shadow: 0 14px 34px rgba(29, 48, 69, 0.28);
 }
 
+/* ---------- 更新通知 ---------- */
+.release-bell { position: relative; }
+.release-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #E11D48;
+  border: 1.5px solid #fff;
+  display: none;
+}
+.release-bell.unseen .release-dot { display: block; }
+.release-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(29, 48, 69, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.release-modal[hidden] { display: none; }
+.release-panel {
+  background: #fff;
+  border-radius: 18px;
+  width: min(460px, 94vw);
+  padding: 22px 24px 18px;
+  box-shadow: 0 40px 90px rgba(22, 40, 58, 0.35);
+}
+.release-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.release-kicker { margin: 0 0 6px; font-size: 10px; letter-spacing: 0.18em; color: var(--sub); font-weight: 700; }
+.release-head h2 { margin: 0; font-size: 19px; line-height: 1.35; color: var(--dark); }
+.release-date {
+  flex-shrink: 0;
+  margin-top: 3px;
+  padding: 3px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 10.5px;
+  color: var(--sub);
+}
+.release-list { margin: 16px 0 4px; padding: 0; list-style: none; display: grid; gap: 10px; }
+.release-list li { position: relative; padding-left: 16px; font-size: 13px; line-height: 1.7; color: var(--text); }
+.release-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dark);
+}
+.release-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.release-foot p { margin: 0; font-size: 10.5px; color: var(--sub); }
+
 @media (prefers-reduced-motion: reduce) {
   .rise { animation: none; }
   * { transition: none !important; }
@@ -655,7 +724,7 @@ body {
   .actions {
     display: grid;
     width: 100%;
-    grid-template-columns: 40px minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: 40px 40px minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: 6px;
   }
   .actions .btn {
