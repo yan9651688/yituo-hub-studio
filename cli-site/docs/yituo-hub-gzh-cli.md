@@ -78,6 +78,7 @@ yituo-hub-gzh doctor --json
 - `blueprint`：蓝图网格
 - `swiss-signal`：瑞士信号
 - `mono-gold`：黑金刊读
+- `pine-soot`：松烟刊读
 
 运行 `styles --json` 可以拿到完整列表，适合由 Agent 展示给用户选择。
 

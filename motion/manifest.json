@@ -2,8 +2,8 @@
   "schema_version": "production-motion-component-library.v6",
   "status": "review-ready",
   "source_static_release": "production-template.static-final.v24",
-  "style_count": 15,
-  "component_count": 74,
+  "style_count": 16,
+  "component_count": 79,
   "roles": [
     "decor",
     "frame",
@@ -338,6 +338,166 @@
       "animation_count": 2,
       "geometry_identity": "passed",
       "provenance": "clean-room derivation from public static-final v24; compatibility rules abstracted from SVG Lab"
+    },
+    {
+      "component_id": "production-motion.title.pine-soot-journal.v6",
+      "style": "pine-soot-journal",
+      "role": "title",
+      "static_file": "assets/production-motion-v6/pine-soot-journal/static_title_pine-soot-journal_motion-v6.svg",
+      "motion_file": "assets/production-motion-v6/pine-soot-journal/motion_title_pine-soot-journal_v6.svg",
+      "motion_kind": "sway+flow",
+      "motion_tracks": [
+        {
+          "kind": "sway",
+          "target": "botanical.sprig.assembled.v1",
+          "count": 2
+        },
+        {
+          "kind": "flow",
+          "target": "pine-soot-journal.title.continuity-spine.v1.motion-trail.v4",
+          "count": 1
+        }
+      ],
+      "preparation": {
+        "trail_unit": "pine-soot-journal.title.continuity-spine.v1.motion-trail.v4",
+        "trail_count": 1,
+        "flow_contrast": {
+          "base_opacity": 0.34,
+          "trail_width_delta": 1.0,
+          "trail_opacity": 0.94
+        }
+      },
+      "target": "botanical.sprig.assembled.v1; pine-soot-journal.title.continuity-spine.v1.motion-trail.v4",
+      "animation_count": 3,
+      "geometry_identity": "passed",
+      "provenance": "sibling derivation from mono-gold-journal v6 (in-repo); compatibility rules abstracted from SVG Lab"
+    },
+    {
+      "component_id": "production-motion.frame.pine-soot-journal.v6",
+      "style": "pine-soot-journal",
+      "role": "frame",
+      "static_file": "assets/production-motion-v6/pine-soot-journal/static_frame_pine-soot-journal_motion-v6.svg",
+      "motion_file": "assets/production-motion-v6/pine-soot-journal/motion_frame_pine-soot-journal_v6.svg",
+      "motion_kind": "sway+flow",
+      "motion_tracks": [
+        {
+          "kind": "sway",
+          "target": "botanical.sprig.assembled.v1",
+          "count": 2
+        },
+        {
+          "kind": "flow",
+          "target": "pine-soot-journal.frame.continuity-spine.v1.motion-trail.v4",
+          "count": 1
+        }
+      ],
+      "preparation": {
+        "trail_unit": "pine-soot-journal.frame.continuity-spine.v1.motion-trail.v4",
+        "trail_count": 1,
+        "flow_contrast": {
+          "base_opacity": 0.34,
+          "trail_width_delta": 1.0,
+          "trail_opacity": 0.94
+        }
+      },
+      "target": "botanical.sprig.assembled.v1; pine-soot-journal.frame.continuity-spine.v1.motion-trail.v4",
+      "animation_count": 3,
+      "geometry_identity": "passed",
+      "provenance": "sibling derivation from mono-gold-journal v6 (in-repo); compatibility rules abstracted from SVG Lab"
+    },
+    {
+      "component_id": "production-motion.section-title.pine-soot-journal.v6",
+      "style": "pine-soot-journal",
+      "role": "section-title",
+      "static_file": "assets/production-motion-v6/pine-soot-journal/static_section-title_pine-soot-journal_motion-v6.svg",
+      "motion_file": "assets/production-motion-v6/pine-soot-journal/motion_section-title_pine-soot-journal_v6.svg",
+      "motion_kind": "flow",
+      "motion_tracks": [
+        {
+          "kind": "flow",
+          "target": "section-title.continuity-rail.v14.motion-trail.v4",
+          "count": 1
+        }
+      ],
+      "preparation": {
+        "trail_unit": "section-title.continuity-rail.v14.motion-trail.v4",
+        "trail_count": 1,
+        "flow_contrast": {
+          "base_opacity": 0.34,
+          "trail_width_delta": 1.0,
+          "trail_opacity": 0.94
+        }
+      },
+      "target": "section-title.continuity-rail.v14.motion-trail.v4",
+      "animation_count": 1,
+      "geometry_identity": "passed",
+      "provenance": "sibling derivation from mono-gold-journal v6 (in-repo); compatibility rules abstracted from SVG Lab"
+    },
+    {
+      "component_id": "production-motion.decor.pine-soot-journal.v6",
+      "style": "pine-soot-journal",
+      "role": "decor",
+      "static_file": "assets/production-motion-v6/pine-soot-journal/static_decor_pine-soot-journal_motion-v6.svg",
+      "motion_file": "assets/production-motion-v6/pine-soot-journal/motion_decor_pine-soot-journal_v6.svg",
+      "motion_kind": "sway+flow",
+      "motion_tracks": [
+        {
+          "kind": "sway",
+          "target": "botanical.sprig.assembled.v1",
+          "count": 1
+        },
+        {
+          "kind": "flow",
+          "target": "pine-soot-journal.decor.continuity-spine.v1.motion-trail.v4",
+          "count": 1
+        }
+      ],
+      "preparation": {
+        "trail_unit": "pine-soot-journal.decor.continuity-spine.v1.motion-trail.v4",
+        "trail_count": 1,
+        "flow_contrast": {
+          "base_opacity": 0.34,
+          "trail_width_delta": 1.0,
+          "trail_opacity": 0.94
+        }
+      },
+      "target": "botanical.sprig.assembled.v1; pine-soot-journal.decor.continuity-spine.v1.motion-trail.v4",
+      "animation_count": 2,
+      "geometry_identity": "passed",
+      "provenance": "sibling derivation from mono-gold-journal v6 (in-repo); compatibility rules abstracted from SVG Lab"
+    },
+    {
+      "component_id": "production-motion.tail.pine-soot-journal.v6",
+      "style": "pine-soot-journal",
+      "role": "tail",
+      "static_file": "assets/production-motion-v6/pine-soot-journal/static_tail_pine-soot-journal_motion-v6.svg",
+      "motion_file": "assets/production-motion-v6/pine-soot-journal/motion_tail_pine-soot-journal_v6.svg",
+      "motion_kind": "sway+flow",
+      "motion_tracks": [
+        {
+          "kind": "sway",
+          "target": "botanical.sprig.assembled.v1",
+          "count": 1
+        },
+        {
+          "kind": "flow",
+          "target": "pine-soot-journal.tail.continuity-spine.v1.motion-trail.v4",
+          "count": 1
+        }
+      ],
+      "preparation": {
+        "trail_unit": "pine-soot-journal.tail.continuity-spine.v1.motion-trail.v4",
+        "trail_count": 1,
+        "flow_contrast": {
+          "base_opacity": 0.34,
+          "trail_width_delta": 1.0,
+          "trail_opacity": 0.94
+        }
+      },
+      "target": "botanical.sprig.assembled.v1; pine-soot-journal.tail.continuity-spine.v1.motion-trail.v4",
+      "animation_count": 2,
+      "geometry_identity": "passed",
+      "provenance": "sibling derivation from mono-gold-journal v6 (in-repo); compatibility rules abstracted from SVG Lab"
     },
     {
       "component_id": "production-motion.title.coral-zine.v6",

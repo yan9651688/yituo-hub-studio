@@ -1,5 +1,6 @@
-/* 蓝梦原创视觉系统：15 套定稿主题 × 6 档展示等级。
+/* 蓝梦原创视觉系统：16 套定稿主题 × 6 档展示等级。
  * 数据取自 wechat-motion-layout Production V6 / presentation-levels v2。
+ * 松烟刊读（pine-soot-journal）为项目内自黑金刊读派生的姊妹篇。
  */
 (function (global, factory) {
   var api = factory();
@@ -21,6 +22,7 @@
   var PROFILES = [
     { themeId: 'vermilion', styleId: 'editorial-vermilion', name: '墨红社论', school: 'editorial', bestFor: '深度观点、评论', paper: '#FFFFFF', surface: '#FBFAF8', ink: '#201F1D', muted: '#777168', accent: '#B33A2B', accent2: '#E4C5B8', line: '#DDD8D0', radius: 0, border: 1, header: 'masthead', section: 'rule-number', brief: 'columns', quote: 'oversize', finish: 'signature', density: 'airy', backgroundMode: 'white', accentOn: '#FFFFFF' },
     { themeId: 'mono-gold', styleId: 'mono-gold-journal', name: '黑金刊读', school: 'editorial', bestFor: '品牌观点、专业长文', paper: '#FFFFFF', surface: '#FBFAF6', ink: '#171714', muted: '#6D675B', accent: '#87682F', accent2: '#D8CCAE', line: '#C7BEAD', radius: 4, border: 1, header: 'luxury-rule', section: 'roman', brief: 'ledger', quote: 'centered', finish: 'thin-rule', density: 'airy', backgroundMode: 'white', accentOn: '#FFFFFF' },
+    { themeId: 'pine-soot', styleId: 'pine-soot-journal', name: '松烟刊读', school: 'editorial', bestFor: '人文随笔、专栏长文', paper: '#FFFFFF', surface: '#F7F8F3', ink: '#1A1D18', muted: '#6A6F64', accent: '#48603F', accent2: '#CBD6BE', line: '#C2C8B8', radius: 4, border: 1, header: 'luxury-rule', section: 'roman', brief: 'ledger', quote: 'centered', finish: 'thin-rule', density: 'airy', backgroundMode: 'white', accentOn: '#FFFFFF' },
     { themeId: 'coral-zine', styleId: 'coral-zine', name: '珊瑚杂志', school: 'editorial', bestFor: '人物、文化、生活方式', paper: '#FFFFFF', surface: '#FFF7F5', ink: '#402D33', muted: '#79676C', accent: '#B95054', accent2: '#E4B1A6', line: '#E9D8D4', radius: 18, border: 0, header: 'zine-block', section: 'pill-index', brief: 'stacked', quote: 'soft-card', finish: 'color-band', density: 'balanced', backgroundMode: 'white', accentOn: '#FFFFFF' },
     { themeId: 'swiss-signal', styleId: 'swiss-signal', name: '瑞士信号', school: 'international', bestFor: '方法论、清单、工具文章', paper: '#FFFFFF', surface: '#F7F7F5', ink: '#1D1D1B', muted: '#66645E', accent: '#3157A4', accent2: '#D0B85A', line: '#C8C7C2', radius: 0, border: 2, header: 'split-grid', section: 'block-index', brief: 'number-grid', quote: 'hard-box', finish: 'square-mark', density: 'compact', backgroundMode: 'white', accentOn: '#FFFFFF' },
     { themeId: 'citrus', styleId: 'citrus-report', name: '柑橘报告', school: 'international', bestFor: '数据报告、复盘', paper: '#FFFFFF', surface: '#F8FAF1', ink: '#20241F', muted: '#6D736A', accent: '#65731F', accent2: '#C87945', line: '#D2D7CD', wash: '#FFF9EE', washSoft: '#FFFDF8', radius: 8, border: 1, header: 'report-strip', section: 'marker-line', brief: 'metric-row', quote: 'highlight-band', finish: 'report-end', density: 'compact', backgroundMode: 'white', accentOn: '#FFFFFF' },
@@ -63,6 +65,14 @@
       { id: 'song-shi', name: '松石', colors: { paper: '#FFFFFF', surface: '#F5FAF8', ink: '#131A18', muted: '#62706C', accent: '#2F6B62', accent2: '#C2D8D2', line: '#C1CFCB' } },
       { id: 'zi-tan', name: '紫檀', colors: { paper: '#FFFFFF', surface: '#FAF6F9', ink: '#181317', muted: '#6D616B', accent: '#5C3A58', accent2: '#D6C2D3', line: '#CCC0CA' } },
       { id: 'shi-mo', name: '石墨', colors: { paper: '#FFFFFF', surface: '#F7F8FA', ink: '#15171B', muted: '#666A72', accent: '#48505C', accent2: '#C9CDD4', line: '#C6CBD1' } }
+    ],
+    /* 松烟刊读：默认松绿。黛蓝/柿红/紫藤/玄墨。 */
+    'pine-soot': [
+      { id: 'default', name: '默认' },
+      { id: 'dai-lan', name: '黛蓝', colors: { paper: '#FFFFFF', surface: '#F5F8F9', ink: '#1A1E24', muted: '#646C76', accent: '#3E5A74', accent2: '#C4D2DC', line: '#BFC9D2' } },
+      { id: 'shi-hong', name: '柿红', colors: { paper: '#FFFFFF', surface: '#FBF5F0', ink: '#211A15', muted: '#75655C', accent: '#9E4A2F', accent2: '#E3C6B4', line: '#DAC9BC' } },
+      { id: 'zi-teng', name: '紫藤', colors: { paper: '#FFFFFF', surface: '#F8F6FA', ink: '#1D1A22', muted: '#6E6878', accent: '#6A5580', accent2: '#D3C9DE', line: '#CFC8D8' } },
+      { id: 'xuan-mo', name: '玄墨', colors: { paper: '#FFFFFF', surface: '#F6F7F8', ink: '#15171B', muted: '#666A70', accent: '#3C4048', accent2: '#C9CDD3', line: '#C4C8CE' } }
     ],
     /* 珊瑚杂志：默认珊瑚红。海盐/抹茶/鸢尾/芒果。 */
     'coral-zine': [

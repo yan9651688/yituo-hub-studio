@@ -2,7 +2,7 @@
   "schema_version": "production-template.motion.v6",
   "status": "review-ready",
   "source_static_release": "production-template.static-final.v24",
-  "count": 15,
+  "count": 16,
   "motion_policy": "V5 semantic motion retained; only Soft Clay title central arch geometry revised",
   "flow_policy": "solid base at .34 opacity plus WSVG-006 trail at base width + 1px",
   "compatibility": "conservative SMIL; no animated stroke-dasharray; no clipPath/mask/filter/foreignObject",
@@ -58,6 +58,32 @@
       "static_sha256": "c21217b814de5897d1976deecd954f0bff67db8ba15613e2be7fdc1ea113974a",
       "motion_sha256": "50dcbab8fa56a6e1efe86ad742cf81cf827a5011b780d56abb63cd22ad013f48",
       "visual_delta_from_v5": "none"
+    },
+    {
+      "style": "pine-soot-journal",
+      "name": "松烟刊读",
+      "motion_file": "information-to-action_pine-soot-journal_motion-v6.html",
+      "static_file": "information-to-action_pine-soot-journal_motion-v6_static.html",
+      "motion_preview": "information-to-action_pine-soot-journal_motion-v6_preview.html",
+      "static_preview": "information-to-action_pine-soot-journal_motion-v6_static_preview.html",
+      "animation_count": 19,
+      "animation_roles": {
+        "title": 3,
+        "frame": 3,
+        "directory-decor": 2,
+        "section-title": 3,
+        "decor": 6,
+        "tail": 2
+      },
+      "motion_kinds": {
+        "sway": 9,
+        "flow": 10
+      },
+      "geometry_identity": "passed",
+      "derived_from": "mono-gold-journal motion-v6 (in-repo sibling derivation)",
+      "static_sha256": "ae325a9299e569a2feb9ee67aa091bcd3c1eea98d2655642f26e471e08595b10",
+      "motion_sha256": "c28d441dc34c0066e40abfe82b7d859e5cd7e92384155ca46784753c8bccc600",
+      "visual_delta_from_v5": "n/a (new sibling style)"
     },
     {
       "style": "coral-zine",

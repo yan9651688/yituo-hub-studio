@@ -6,11 +6,11 @@
 
 **把 Markdown 一键排成可直接粘贴进微信公众号编辑器的精致 HTML**
 
-18 套基础主题 · 15 套高级排版 · 76 种分级组合 · 74 组动静态组件 · 一键复制
+18 套基础主题 · 16 套高级排版 · 81 种分级组合 · 79 组动静态组件 · 一键复制
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
-[![Themes](https://img.shields.io/badge/themes-18%2B15-1D4ED8)](#-两个主题库18--15)
-[![Advanced](https://img.shields.io/badge/高级排版-76-705B8C)](#-高级排版分级视觉)
+[![Themes](https://img.shields.io/badge/themes-18%2B16-1D4ED8)](#-两个主题库18--16)
+[![Advanced](https://img.shields.io/badge/高级排版-81-705B8C)](#-高级排版分级视觉)
 [![No Build](https://img.shields.io/badge/构建-零依赖-success)](#-快速开始)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-作者)
 
@@ -26,8 +26,8 @@
 
 ## ✨ 核心特性
 
-- **两个并列主题库**：18 套基础主题与 15 套高级排版（蓝梦原创视觉）在工具栏独立选择，不使用“全部 33 套”的混合视图。
-- **六档高级排版**：“高级排版”库提供 L1 黑白极简单例，以及 15 套主题各自的 L2–L6；静态简约、静态标题栏、静态主题场景、标题动效和完整主题动效都在原 Studio 内切换。
+- **两个并列主题库**：18 套基础主题与 16 套高级排版（蓝梦原创视觉）在工具栏独立选择，不使用“全部 34 套”的混合视图。
+- **六档高级排版**：“高级排版”库提供 L1 黑白极简单例，以及 16 套主题各自的 L2–L6；静态简约、静态标题栏、静态主题场景、标题动效和完整主题动效都在原 Studio 内切换。
 - **动态 / 静态成对**：L5、L6 可直接切换为几何一致的静态回退；正文、章节文字始终保持普通可编辑 HTML。
 - **终稿结构不重造**：L4–L6 直接以冻结的 V24 静态终稿和其 V6 动态派生模板为结构源；标题、导读框、目录、章节装饰与尾部 `content_anchor` 原样保留，只替换 Markdown 文本槽。
 - **不掉格式**：样式全部内联、文字一律 `<span leaf="">` 包裹；基础主题继续规避脆弱布局，高级排版仅保留终稿透明叠层所必需的 `display:grid`，不使用 absolute/fixed/sticky 定位。
@@ -43,29 +43,29 @@
 <table>
 <tr>
 <td width="50%" align="center"><img src="assets/landing-preview.png" width="100%"><br><sub><b>电影感首页 · 照片级雪山 + 云雾漂移 + 鼠标视差</b></sub></td>
-<td width="50%" align="center"><img src="assets/advanced-preview.png" width="100%"><br><sub><b>高级排版 · 素金手记（黑金刊读）L4 静态终稿，15 套高级排版之一</b></sub></td>
+<td width="50%" align="center"><img src="assets/advanced-preview.png" width="100%"><br><sub><b>高级排版 · 素金手记（黑金刊读）L4 静态终稿，16 套高级排版之一</b></sub></td>
 </tr>
 </table>
 
-## 🎨 两个主题库（18 + 15）
+## 🎨 两个主题库（18 + 16）
 
 | 分组 | 主题 |
 |------|------|
 | **杂志编辑部**（原创 6 套） | 深海蓝 `#1D4ED8` · 曙光橙 `#EA580C` · 星穹紫 `#7C3AED` · 鎏金黑 `#111827` · 青瓷 `#0F766E` · 绯樱 `#DB2777` |
 | **经典复刻**（致敬 [gzh-design-skill](https://github.com/isjiamu/gzh-design-skill)） | 摸鱼绿 · 红白风 · 石墨极简 · 留白禅意 · 摸鱼票据 · 橄榄手记 |
 | **新锐系列** | 摩卡 · 勃艮第 · 午夜靛蓝 · 芒果琥珀 · 湖水青 · 燕麦拿铁 |
-| **高级排版**（蓝梦原创视觉，来自 [wechat-motion-layout-studio](https://github.com/lanmengSakura/wechat-motion-layout-studio)，15 套） | 墨红社论 · 黑金刊读 · 珊瑚杂志 · 瑞士信号 · 柑橘报告 · 蓝图网格 · 稻纸朱砂 · 植物手记 · 柔和陶土 · 深海终端 · 雾蓝研究 · 紫灰工作室 · 新粗野 · 暗夜编辑 · 档案棕褐 |
+| **高级排版**（蓝梦原创视觉，来自 [wechat-motion-layout-studio](https://github.com/lanmengSakura/wechat-motion-layout-studio)，16 套） | 墨红社论 · 黑金刊读 · 松烟刊读 · 珊瑚杂志 · 瑞士信号 · 柑橘报告 · 蓝图网格 · 稻纸朱砂 · 植物手记 · 柔和陶土 · 深海终端 · 雾蓝研究 · 紫灰工作室 · 新粗野 · 暗夜编辑 · 档案棕褐 |
 
-> 基础主题仍由 `themes.js` 的参数化 spec 管理；“高级排版”使用蓝梦原创的独立注册表与 Production V6 组件，避免和基础换色模板混为一类。
+> 基础主题仍由 `themes.js` 的参数化 spec 管理；“高级排版”使用蓝梦原创的独立注册表与 Production V6 组件，避免和基础换色模板混为一类。其中「松烟刊读」为项目内自「黑金刊读」派生的姊妹篇。
 
 ## ✨ 高级排版分级视觉
 
-完整矩阵为 **1 个黑白极简单例 + 15 套主题 × 5 个主题等级 = 76 种组合**：
+完整矩阵为 **1 个黑白极简单例 + 16 套主题 × 5 个主题等级 = 81 种组合**：
 
 | 等级 | 输出 |
 |------|------|
 | L1 黑白极简 | 唯一单例，无主题色、SVG 与动效 |
-| L2 静态简约 | 15 套定稿静态结构 |
+| L2 静态简约 | 16 套定稿静态结构 |
 | L3 静态装饰标题栏 | 静态标题引导线 + 章节路径装饰 |
 | L4 静态主题场景 | 冻结 V24 完整静态模板，含标题、导读、目录、章节与尾部锚点 |
 | L5 标题场景动效 | V6 动态标题 + V24 其余静态终稿结构 |
@@ -131,12 +131,12 @@ docker build -t yituo-hub-studio . && docker run -d -p 80:80 yituo-hub-studio
 ├── index.html        电影感首页（雪山云雾 + 鼠标视差）
 ├── studio.html       排版工坊
 ├── themes.js         基础主题引擎与通用排版组件
-├── original-visuals-data.js  15 套原创主题与 6 档等级注册表
+├── original-visuals-data.js  16 套原创主题与 6 档等级注册表
 ├── original-visuals.js       原创完整文章组合与动静态回退渲染器
 ├── converter.js      Markdown → 语义 token（含智能标记策略）
 ├── validator.js      公众号平台红线校验器
 ├── app.js            工坊前端（并列主题库 + 原创等级选择）
-├── motion/           Production V6（74 组 / 148 个 SVG + 30 份最终静态/动态模板）
+├── motion/           Production V6（79 组 / 158 个 SVG + 32 份最终静态/动态模板）
 └── deploy.sh / Dockerfile / nginx.conf
 ```
 

@@ -72,7 +72,7 @@ const baseLibrary = Themes.LIBRARIES.find(function (library) { return library.id
 const originalLibrary = Themes.LIBRARIES.find(function (library) { return library.id === 'original'; });
 const baseThemeCount = Themes.SPECS.filter(function (spec) { return baseLibrary.groups.includes(spec.group); }).length;
 const originalThemeCount = Themes.SPECS.filter(function (spec) { return originalLibrary.groups.includes(spec.group); }).length;
-const librariesOk = baseThemeCount === 18 && originalThemeCount === 15
+const librariesOk = baseThemeCount === 18 && originalThemeCount === 16
   && originalLibrary.name === '高级排版' && originalLibrary.shortName === '高级排版'
   && baseLibrary.groups.every(function (group) { return !originalLibrary.groups.includes(group); });
 console.log('theme-libraries ' + (librariesOk ? 'PASS' : 'FAIL')
@@ -230,7 +230,7 @@ console.log('final-template-standard402-typography ' + (templateTypographyFailur
   + ' files=' + (templateManifest.templates.length * 2) + ' failures=' + templateTypographyFailures);
 if (templateTypographyFailures) fail = true;
 
-/* 高级排版（蓝梦原创视觉）：1 个单例 + 15 主题 × 5 档 = 76 个组合。 */
+/* 高级排版（蓝梦原创视觉）：1 个单例 + 16 主题 × 5 档 = 81 个组合。 */
 function loadOriginalAssets(requirements) {
   const assets = {};
   for (const requirement of requirements) {
@@ -348,7 +348,7 @@ console.log('advanced-full-effect-themes ' + (fullEffectThemeFailures === 0 ? 'P
   + ' themes=' + OriginalData.PROFILES.length + ' failures=' + fullEffectThemeFailures);
 if (fullEffectThemeFailures) fail = true;
 
-/* 默认示例没有图床：15 套最终模板均用本主题目录纹样占位，且占位副本不得携带动画。 */
+/* 默认示例没有图床：16 套最终模板均用本主题目录纹样占位，且占位副本不得携带动画。 */
 let advancedPlaceholderFailures = 0;
 for (const profile of OriginalData.PROFILES) {
   const spec = Themes.getSpec(profile.themeId);
@@ -556,13 +556,13 @@ console.log('advanced-standard402-typography ' + (exportTypographyOk ? 'PASS' : 
   + ' exported-deep-sea=18/12/16/15/13/7.5 minimal=' + minimalTitleSize);
 if (!exportTypographyOk) originalFailures++;
 
-const combinationOk = originalCombinations === 76 && originalFailures === 0 && dynamicPairs === 30;
+const combinationOk = originalCombinations === 81 && originalFailures === 0 && dynamicPairs === 32;
 console.log('original-visuals ' + (combinationOk ? 'PASS' : 'FAIL')
   + ' combinations=' + originalCombinations + ' dynamicPairs=' + dynamicPairs
   + ' failures=' + originalFailures);
 if (!combinationOk) fail = true;
 
-/* 148 个 SVG 必须保持保守子集，禁止可执行/引用型特性。 */
+/* 158 个 SVG 必须保持保守子集，禁止可执行/引用型特性。 */
 let unsafeSvg = 0;
 for (const component of manifest.components) {
   for (const key of ['static_file', 'motion_file']) {
@@ -574,10 +574,10 @@ for (const component of manifest.components) {
     }
   }
 }
-console.log('svg-safety ' + (unsafeSvg === 0 ? 'PASS' : 'FAIL') + ' files=148 unsafe=' + unsafeSvg);
+console.log('svg-safety ' + (unsafeSvg === 0 ? 'PASS' : 'FAIL') + ' files=158 unsafe=' + unsafeSvg);
 if (unsafeSvg) fail = true;
 
-/* ---------- 高级排版配色系统：15 主题 × 5 配色（默认 + 4 定制） ---------- */
+/* ---------- 高级排版配色系统：16 主题 × 5 配色（默认 + 4 定制） ---------- */
 
 function colorLuminance(hex) {
   const channels = [1, 3, 5].map(function (offset) {

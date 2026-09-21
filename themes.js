@@ -480,9 +480,9 @@
       + out.join('\n') + '</section>';
   }
 
-  /* ---------------- 33 套主题 ----------------
+  /* ---------------- 34 套主题 ----------------
    * base library: editorial / classic / fresh（18 套）
-   * original library: motion（高级排版，蓝梦原创视觉 15 套）
+   * original library: motion（高级排版，蓝梦原创视觉 16 套）
    * classic 组的配色与下划线取自原版 theme-index.md，组件形态为参数化复刻。
    */
 
@@ -730,6 +730,14 @@
       underline: 'border-bottom:2px solid #D8CCAE;font-weight:600;',
       cover: 'minimal', sectionTitle: 'chip', quote: 'leftbar', toc: 'list', signature: 'line', code: 'light',
       c: { primary: '#87682F', deep: '#171714', light: '#D8CCAE', tint: '#FAF8F3', ink: '#171714', text: '#3C382F', sub: '#6D675B', border: '#E5DFD2', accent: '#87682F', coverA: '#87682F', coverB: '#171714', codeBg: '#FAF8F3' }
+    },
+    {
+      id: 'pine-soot', name: '松烟刊读', en: 'PINE SOOT JOURNAL', kickerZh: '人文长文', group: 'motion',
+      desc: '松烟墨绿 · 清雅刊读',
+      swatch: '#48603F', radius: '6px',
+      underline: 'border-bottom:2px solid #CBD6BE;font-weight:600;',
+      cover: 'minimal', sectionTitle: 'chip', quote: 'leftbar', toc: 'list', signature: 'line', code: 'light',
+      c: { primary: '#48603F', deep: '#1A1D18', light: '#CBD6BE', tint: '#F7F8F3', ink: '#1A1D18', text: '#3A3E36', sub: '#6A6F64', border: '#E0E4D8', accent: '#48603F', coverA: '#48603F', coverB: '#1A1D18', codeBg: '#F7F8F3' }
     },
     {
       id: 'neo-brutal', name: '新粗野', en: 'NEO BRUTAL', kickerZh: '锐评专栏', group: 'motion',
