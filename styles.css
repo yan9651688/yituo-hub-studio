@@ -43,11 +43,12 @@ body {
   top: 0;
   z-index: 50;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px 16px;
   padding: 14px 32px;
-  background: rgba(244, 246, 248, 0.88);
+  background: rgba(244, 246, 248, 0.92);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
@@ -76,7 +77,20 @@ body {
   color: var(--sub2);
   text-transform: uppercase;
 }
-.actions { display: flex; gap: 10px; align-items: center; }
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: min(100%, 920px);
+}
+.actions > .btn,
+.actions > .picker-slot,
+.actions > button {
+  flex-shrink: 0;
+}
+
 .topbar-soft-link {
   font-size: 12px;
   font-weight: 500;
@@ -98,26 +112,30 @@ body {
 .ai-setting-tip a:hover { border-bottom-color: var(--dark); }
 
 
-/* ---------- 易拓AI 中转站推广条 ---------- */
+/* ---------- 易拓AI 中转站推广条（文档流，绝不盖住顶栏） ---------- */
 .hub-promo-banner {
-  z-index: 40;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
   background: linear-gradient(90deg, #1D3045 0%, #33546F 100%);
   color: #fff;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+.hub-promo-banner[hidden] { display: none !important; }
 .hub-promo-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 10px 24px;
+  padding: 8px 24px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 .hub-promo-copy {
   margin: 0;
   flex: 1;
-  font-size: 13px;
-  line-height: 1.45;
+  min-width: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
   letter-spacing: 0.02em;
   color: rgba(255,255,255,0.92);
 }
@@ -139,11 +157,32 @@ body {
   cursor: pointer;
   padding: 2px 6px;
   border-radius: 6px;
+  flex-shrink: 0;
 }
 .hub-promo-dismiss:hover { color: #fff; background: rgba(255,255,255,0.12); }
+
+/* 首页：放在 hero 内的轻量条，不参与顶栏叠层 */
+.hub-promo-banner.hub-promo-in-hero {
+  margin: 22px 0 0;
+  border: 1px solid rgba(29, 48, 69, 0.12);
+  border-radius: 14px;
+  background: rgba(29, 48, 69, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(29, 48, 69, 0.12);
+}
+.hub-promo-banner.hub-promo-in-hero .hub-promo-inner {
+  padding: 10px 14px;
+  max-width: none;
+}
+.hub-promo-banner.hub-promo-in-hero .hub-promo-copy {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.94);
+}
+
 @media (max-width: 720px) {
-  .hub-promo-inner { padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
-  .hub-promo-copy { flex: 1 1 calc(100% - 40px); font-size: 12.5px; }
+  .hub-promo-inner { padding: 8px 14px; gap: 10px; flex-wrap: wrap; }
+  .hub-promo-copy { flex: 1 1 calc(100% - 40px); font-size: 12px; }
 }
 
 /* ---------- 按钮语言：胶囊 + 圆形细线 ---------- */

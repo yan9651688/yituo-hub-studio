@@ -2,10 +2,19 @@
 .landing .topbar {
   position: absolute;
   top: 0; left: 0; right: 0;
+  z-index: 30;
   background: transparent;
   border-bottom: 1px solid rgba(29, 48, 69, 0.07);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  /* 覆盖 styles 里 sticky 顶栏的毛玻璃底，保持首页沉浸 */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.landing .hub-promo-banner.hub-promo-in-hero {
+  position: relative;
+  z-index: 11; /* 低于顶栏 30，高于 scene 装饰 */
 }
 
 .scene {
