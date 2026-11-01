@@ -97,6 +97,55 @@ body {
 .ai-setting-tip a { color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--line); }
 .ai-setting-tip a:hover { border-bottom-color: var(--dark); }
 
+
+/* ---------- 易拓AI 中转站推广条 ---------- */
+.hub-promo-banner {
+  z-index: 40;
+  background: linear-gradient(90deg, #1D3045 0%, #33546F 100%);
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.hub-promo-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hub-promo-copy {
+  margin: 0;
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.92);
+}
+.hub-promo-copy strong { font-weight: 700; color: #fff; }
+.hub-promo-banner .btn.tiny.primary {
+  background: #fff;
+  color: #1D3045;
+  border-color: #fff;
+  flex-shrink: 0;
+}
+.hub-promo-banner .btn.tiny.primary:hover { background: #f0f4f8; transform: none; }
+.hub-promo-dismiss {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,0.72);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.hub-promo-dismiss:hover { color: #fff; background: rgba(255,255,255,0.12); }
+@media (max-width: 720px) {
+  .hub-promo-inner { padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
+  .hub-promo-copy { flex: 1 1 calc(100% - 40px); font-size: 12.5px; }
+}
+
 /* ---------- 按钮语言：胶囊 + 圆形细线 ---------- */
 .btn {
   border: 1px solid transparent;

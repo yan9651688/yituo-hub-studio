@@ -43,9 +43,18 @@
     </a>
     <a class="btn ghost" href="create.html">AI 创作</a>
     <a class="btn ghost" href="/gen/">生图工作台</a>
+    <a class="btn ghost" href="https://www.yituohub.si/" target="_blank" rel="noopener" title="易拓AI API 中转站">API 中转站</a>
     <a class="btn ghost" href="studio.html">进入工坊</a>
   </div>
 </header>
+
+<div class="hub-promo-banner" id="hubPromoBanner" hidden>
+  <div class="hub-promo-inner">
+    <p class="hub-promo-copy"><strong>易拓AI 中转站</strong> · 国内稳定、OpenAI 兼容 API，创作 / 润色即开即用</p>
+    <a class="btn tiny primary" href="https://www.yituohub.si/" target="_blank" rel="noopener">去开通</a>
+    <button type="button" class="hub-promo-dismiss" aria-label="关闭推广">×</button>
+  </div>
+</div>
 
 <main class="scene">
   <div class="layer" data-depth="0.3">
@@ -119,6 +128,23 @@
   } catch (e) {
     var d = document.querySelector('.cursor-dot'), r = document.querySelector('.cursor-ring');
     if (d) d.remove(); if (r) r.remove();
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var KEY = 'yth.promo.hub.v1';
+  var banner = document.getElementById('hubPromoBanner');
+  if (!banner) return;
+  try { if (localStorage.getItem(KEY) === '1') return; } catch (e) {}
+  banner.hidden = false;
+  var dismiss = banner.querySelector('.hub-promo-dismiss');
+  if (dismiss) {
+    dismiss.addEventListener('click', function () {
+      banner.hidden = true;
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+    });
   }
 })();
 </script>
