@@ -941,9 +941,9 @@
       var rich = new Blob([state.html], { type: 'text/html' });
       if (navigator.clipboard && window.ClipboardItem) {
         navigator.clipboard.write([new ClipboardItem({ 'text/html': rich, 'text/plain': plain })])
-          .then(function () { toast('✓ 已复制，去公众号编辑器粘贴'); saveHistoryNow(); })
-          .catch(function () { fallbackCopy(); toast('✓ 已复制（兼容模式）'); saveHistoryNow(); });
-      } else { fallbackCopy(); toast('✓ 已复制（兼容模式）'); saveHistoryNow(); }
+          .then(function () { toast('✓ 已复制，去公众号编辑器粘贴 · 创作 API 可选用易拓AI 中转站'); saveHistoryNow(); })
+          .catch(function () { fallbackCopy(); toast('✓ 已复制（兼容模式） · 创作 API 可选用易拓AI 中转站'); saveHistoryNow(); });
+      } else { fallbackCopy(); toast('✓ 已复制（兼容模式） · 创作 API 可选用易拓AI 中转站'); saveHistoryNow(); }
     }).catch(function () { toast('高级排版尚未载入完成'); });
   }
 
@@ -1027,7 +1027,7 @@
       }).then(function (blob) {
         if (!blob) throw new Error('浏览器未能编码 PNG');
         saveBlob(blob, exportName('png'));
-        toast('✓ 长图已导出 PNG');
+        toast('✓ 长图已导出 PNG · 创作 API 可选用易拓AI 中转站');
       });
     }).catch(function (error) {
       toast(error && error.message ? error.message : '长图导出失败，请稍后重试');

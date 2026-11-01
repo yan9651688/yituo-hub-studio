@@ -62,6 +62,14 @@
   color: var(--sub2);
 }
 .api-hint span { color: var(--sub); font-weight: 600; }
+.api-key-tip {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--sub);
+}
+.api-key-tip a { color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--line); }
+.api-key-tip a:hover { border-bottom-color: var(--dark); }
 
 .field-label {
   margin-top: 4px;
