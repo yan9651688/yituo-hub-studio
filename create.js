@@ -93,6 +93,23 @@
 
   function apiKey() { return keyInput.value.trim(); }
 
+  var apiKeyTip = document.getElementById('apiKeyTip');
+  function refreshApiKeyTip() {
+    if (!apiKeyTip) return;
+    apiKeyTip.hidden = !!apiKey();
+  }
+
+  function needApiKey(actionLabel) {
+    if (apiKey()) return false;
+    refreshApiKeyTip();
+    toast(actionLabel || '先填写 API 密钥');
+    if (apiKeyTip && !apiKeyTip.hidden) {
+      try { apiKeyTip.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {}
+    }
+    keyInput.focus();
+    return true;
+  }
+
   function persist() {
     try {
       localStorage.setItem(LS.base, baseInput.value.trim() || DEFAULT_BASE);
@@ -169,7 +186,7 @@
   }
 
   function loadModels() {
-    if (!apiKey()) { toast('先填写 API 密钥'); keyInput.focus(); return; }
+    if (needApiKey('先填写 API 密钥')) return;
     persist();
     setConn('载入模型…', 'warn');
     modelsBtn.disabled = true;
@@ -257,7 +274,7 @@
 
   function generate() {
     if (state.generating) return;
-    if (!apiKey()) { toast('先填写 API 密钥'); keyInput.focus(); return; }
+    if (needApiKey('先填写 API 密钥')) return;
     if (!modelSelect.value) { toast('先点「刷新模型」选一个模型'); return; }
     if (!topicInput.value.trim()) { toast('先写下选题'); topicInput.focus(); return; }
     if (state.type === 'custom' && !customType.value.trim()) { toast('自定义类型：先写一句要求'); customType.focus(); return; }
@@ -618,7 +635,8 @@
   generateBtn.addEventListener('click', generate);
   stopBtn.addEventListener('click', function () { if (state.controller) state.controller.abort(); });
   modelsBtn.addEventListener('click', loadModels);
-  keyInput.addEventListener('change', loadModels);
+  keyInput.addEventListener('input', refreshApiKeyTip);
+  keyInput.addEventListener('change', function () { refreshApiKeyTip(); loadModels(); });
   baseInput.addEventListener('change', loadModels);
   copyBtn.addEventListener('click', copyMarkdown);
   toStudioBtn.addEventListener('click', sendToStudio);
@@ -665,6 +683,7 @@
     syncCustomFields();
     refreshImgbedState();
     if (saved.topic) setStat('选题草稿已恢复', 'warn');
+    refreshApiKeyTip();
     if (saved.key) loadModels(); else setConn('未连接 · 待填密钥', 'warn');
   })();
 })();

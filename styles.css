@@ -77,6 +77,25 @@ body {
   text-transform: uppercase;
 }
 .actions { display: flex; gap: 10px; align-items: center; }
+.topbar-soft-link {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--sub);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding: 2px 0;
+  white-space: nowrap;
+}
+.topbar-soft-link:hover { color: var(--dark); border-bottom-color: var(--line); }
+.ai-setting-tip {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--sub);
+}
+.ai-setting-tip a { color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--line); }
+.ai-setting-tip a:hover { border-bottom-color: var(--dark); }
 
 /* ---------- 按钮语言：胶囊 + 圆形细线 ---------- */
 .btn {

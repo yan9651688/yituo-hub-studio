@@ -175,6 +175,7 @@
         + '<label>API 地址<input data-field="base" type="text" value="' + Shared.esc(conf.base) + '"></label>'
         + '<label>API 密钥<input data-field="key" type="password" placeholder="sk-…" value="' + Shared.esc(conf.key) + '"></label>'
         + '<label>模型名<input data-field="model" type="text" placeholder="如 gpt-4o-mini" value="' + Shared.esc(conf.model) + '"></label>'
+        + (conf.key ? '' : '<p class="ai-setting-tip"><a href="https://www.yituohub.si/" target="_blank" rel="noopener">没有密钥？可在易拓AI 中转站自助开通（OpenAI 兼容）</a></p>')
         + '<div class="ai-setting-actions"><button type="button" class="btn tiny primary" data-ai-save>保存</button>'
         + '<button type="button" class="btn tiny ghost" data-ai-cancel>取消</button></div>';
       panel.addEventListener('click', function (event) { event.stopPropagation(); });
