@@ -163,6 +163,18 @@ body {
 .btn.primary { background: var(--dark); color: #fff; }
 .btn.primary:hover { background: var(--dark-2); transform: translateY(-1px); }
 .btn.ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+.btn.hub-entry {
+  flex-shrink: 0;
+  white-space: nowrap;
+  color: var(--dark);
+  border-color: #C5D0DA;
+  background: #fff;
+}
+.btn.hub-entry:hover {
+  border-color: var(--dark);
+  background: var(--bg);
+}
+
 .btn.ghost:hover { border-color: var(--dark); }
 .btn:disabled { cursor: wait; opacity: 0.62; }
 .btn.tiny { padding: 5px 12px; font-size: 11.5px; }
