@@ -1070,6 +1070,8 @@
       var button = document.createElement('button');
       button.type = 'button';
       button.className = 'picker-btn history-btn';
+      button.setAttribute('aria-label', '排版历史');
+      button.innerHTML = '<span class="picker-kind">历史</span>';
       button.addEventListener('click', function (event) {
         event.stopPropagation();
         dropdown.setOpen(!dropdown.open);
@@ -1083,6 +1085,7 @@
     },
     renderPop: renderHistoryPop
   });
+  renderHistoryButton();
 
   var cardDropdown = createDropdown(cardSlot, {
     popId: 'cardPickerPop',
@@ -1091,6 +1094,8 @@
       var button = document.createElement('button');
       button.type = 'button';
       button.className = 'picker-btn card-btn';
+      button.setAttribute('aria-label', '封面与分享卡片');
+      button.innerHTML = '<span class="picker-kind">卡片</span>';
       button.addEventListener('click', function (event) {
         event.stopPropagation();
         dropdown.setOpen(!dropdown.open);
@@ -1104,6 +1109,7 @@
     },
     renderPop: renderCardPop
   });
+  renderCardControls();
 
   editor.addEventListener('paste', function (event) {
     var data = event.clipboardData;
