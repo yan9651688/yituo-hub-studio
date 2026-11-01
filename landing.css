@@ -175,3 +175,13 @@ body.landing.cursor-ready, body.landing.cursor-ready a, body.landing.cursor-read
 @media (prefers-reduced-motion: reduce) {
   .fog, .layer { animation: none !important; transition: none !important; }
 }
+
+.scene-foot a {
+  color: rgba(29, 48, 69, 0.72);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(29, 48, 69, 0.28);
+}
+.scene-foot a:hover {
+  color: rgba(29, 48, 69, 0.95);
+  border-color: rgba(29, 48, 69, 0.55);
+}
