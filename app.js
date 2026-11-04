@@ -345,7 +345,7 @@
 
   function closeOpenDropdown() { if (openDropdown) openDropdown.close(); }
 
-  /* ---------- 主题库下拉（基础 18 套 / 高级排版 16 套） ---------- */
+  /* ---------- 主题库下拉（基础排版 20 套） ---------- */
 
   function libraryThemes(library) {
     return Themes.SPECS.filter(function (spec) { return library.groups.indexOf(spec.group) !== -1; });
@@ -406,7 +406,7 @@
     var inLibrary = libraryThemes(library);
     var note = inLibrary.length + ' THEMES' + (library.id === 'original' ? ' · 6 LEVELS' : '');
     var html = '<div class="pop-head"><span class="pop-title">' + library.en + ' · ' + library.name + '</span><span class="pop-note">' + note + '</span></div>';
-    if (library.groups.length > 1) {
+    if (library.showTabs) {
       html += '<div class="pop-tabs">';
       Themes.GROUPS.filter(function (group) { return group.id === 'all' || library.groups.indexOf(group.id) !== -1; }).forEach(function (group) {
         var count = group.id === 'all' ? inLibrary.length : inLibrary.filter(function (spec) { return spec.group === group.id; }).length;
@@ -1150,7 +1150,7 @@
   }
 
   /* ---------- 版本更新弹窗：每个版本只弹一次 ---------- */
-  var UPDATE_NOTICE_KEY = 'yituo-update-notice-v2026-11-04';
+  var UPDATE_NOTICE_KEY = 'yituo-update-notice-v2026-11-04b';
   function showUpdateNotice() {
     try { if (localStorage.getItem(UPDATE_NOTICE_KEY)) return; } catch (error) { return; }
     var creative = Themes.SPECS.filter(isCreativeSpec);
@@ -1164,11 +1164,11 @@
       + '<button type="button" class="un-close" aria-label="关闭">×</button>'
       + '<div class="un-badge">NEW · 2026.11</div>'
       + '<h3 id="updateNoticeTitle">排版库全新升级</h3>'
-      + '<p class="un-lead">原「高级排版」16 套现已成为<b>基础排版</b>，全部免费可用；新的<b>高级排版</b>上线 4 套创意风格，粘贴进公众号同样稳定：</p>'
+      + '<p class="un-lead">旧基础排版已下线，原「高级排版」16 套已并入<b>基础排版</b>，并新增 4 款创意排版，共 20 套，粘贴进公众号同样稳定：</p>'
       + '<ul class="un-list">' + creative.map(function (spec) {
         return '<li><span class="un-sw" style="background:' + spec.swatch + '"></span><span><b>' + spec.name + '</b><small>' + spec.desc + '</small></span></li>';
       }).join('') + '</ul>'
-      + '<p class="un-foot">旧版 18 套基础主题已下线，已保存的草稿会自动切换到新主题，正文不受影响。</p>'
+      + '<p class="un-foot">已保存的草稿若使用已下线的旧主题，会自动切换到新主题，正文不受影响。</p>'
       + '<div class="un-actions"><button type="button" class="un-later">知道了</button><button type="button" class="un-try">立即试试</button></div>'
       + '</div>';
     document.body.appendChild(wrap);
@@ -1193,7 +1193,7 @@
       renderLevelControls();
       renderColorControls();
       convert().catch(logConvertError);
-      toast('已切换到高级排版「' + creative[0].name + '」');
+      toast('已切换到新款「' + creative[0].name + '」');
     });
   }
 

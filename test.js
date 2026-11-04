@@ -83,15 +83,14 @@ checkConditions('offline-long-image-export', [
 ]);
 
 const originalLibrary = Themes.LIBRARIES.find(function (library) { return library.id === 'original'; });
-const creativeLibrary = Themes.LIBRARIES.find(function (library) { return library.id === 'creative'; });
 const originalThemeCount = Themes.SPECS.filter(function (spec) { return originalLibrary.groups.includes(spec.group); }).length;
-const creativeThemeCount = Themes.SPECS.filter(function (spec) { return creativeLibrary.groups.includes(spec.group); }).length;
+const creativeThemeCount = Themes.SPECS.filter(function (spec) { return spec.group === 'creative'; }).length;
 const baseThemeCount = Themes.RETIRED_SPECS.length;
 const baseLibrary = { groups: ['editorial', 'classic', 'fresh'] };
 checkConditions('theme-libraries', [
-  ['仅两个资源域', Themes.LIBRARIES.length === 2],
-  ['基础排版 16 套（原高级排版）', originalThemeCount === 16 && originalLibrary.name === '基础排版'],
-  ['高级排版 4 套创意', creativeThemeCount === 4 && creativeLibrary.name === '高级排版'],
+  ['仅一个资源域：基础排版', Themes.LIBRARIES.length === 1 && originalLibrary.name === '基础排版'],
+  ['基础排版 20 套（16 原高级 + 4 创意）', originalThemeCount === 20 && creativeThemeCount === 4],
+  ['无「高级排版」库', Themes.LIBRARIES.every(function (l) { return l.name !== '高级排版'; })],
   ['旧基础主题已下线（18 套仅保留给引擎测试）', baseThemeCount === 18 && Themes.SPECS.every(function (spec) { return ['motion', 'creative'].includes(spec.group); })],
   ['选择器总数 20', Themes.SPECS.length === 20],
   ['已下线 id 回退到第一套', Themes.hasSpec('ocean') === false && Themes.getSpec('ocean').id === Themes.SPECS[0].id],
@@ -996,7 +995,7 @@ console.log('creative-layouts ' + (creativeFailures === 0 ? 'PASS' : 'FAIL') + '
 if (creativeFailures) fail = true;
 
 checkConditions('update-notice', [
-  ['版本化 localStorage key', appSource.indexOf("'yituo-update-notice-v2026-11-04'") !== -1],
+  ['版本化 localStorage key', appSource.indexOf("'yituo-update-notice-v2026-11-04b'") !== -1],
   ['可关闭', appSource.indexOf('un-close') !== -1 && appSource.indexOf('un-later') !== -1],
   ['立即试试', appSource.indexOf('un-try') !== -1],
   ['弹窗样式 + 移动端适配', stylesSource.indexOf('.update-notice') !== -1 && /@media \(max-width: 640px\) \{\s*\.update-notice/.test(stylesSource)],

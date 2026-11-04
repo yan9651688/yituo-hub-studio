@@ -319,7 +319,7 @@
       c: { primary: '#705B8C', deep: '#352E3E', light: '#DDD7E1', tint: '#F7F5FA', ink: '#352E3E', text: '#4A4254', sub: '#716779', border: '#E4DFEA', accent: '#D97A4A', coverA: '#8A6FA8', coverB: '#5C4A75', codeBg: '#352E3E' }
         },
 
-    /* ---------- 高级排版（2026.11 新增 4 套创意排版，纯静态内联结构，兼容性优先） ---------- */
+    /* ---------- 基础排版（2026.11 新增 4 套创意排版，纯静态内联结构，兼容性优先） ---------- */
     {
       id: 'ink-scroll', name: '水墨长卷', en: 'INK SCROLL', kickerZh: '国风长卷', group: 'creative',
       desc: '宣纸墨色 · 竖排题签与朱印',
@@ -357,13 +357,12 @@
   var GROUPS = [
     { id: 'all', name: '全部' },
     { id: 'motion', name: '基础排版' },
-    { id: 'creative', name: '高级排版' }
+    { id: 'creative', name: '创意新款' }
   ];
 
   /* 顶层资源域（2026.11 调整）：原 16 套「高级排版」转为基础排版；高级排版为 4 套新创意排版。 */
   var LIBRARIES = [
-    { id: 'original', name: '基础排版', shortName: '基础', en: 'BASIC LAYOUTS', groups: ['motion'] },
-    { id: 'creative', name: '高级排版', shortName: '高级排版', en: 'ADVANCED LAYOUTS', groups: ['creative'] }
+    { id: 'original', name: '基础排版', shortName: '基础', en: 'BASIC LAYOUTS', groups: ['motion', 'creative'] }
   ];
 
   return { SPECS: SPECS, RETIRED_SPECS: RETIRED_SPECS, GROUPS: GROUPS, LIBRARIES: LIBRARIES };
