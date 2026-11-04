@@ -25,6 +25,19 @@
 
 打开网页，粘贴 Markdown，选一套主题，点「复制到公众号」——粘贴进编辑器，**样式纹丝不丢**。每段自动标关键词下划线、章节自动编号配英文小标、引言卡与导读目录自动生成、文末签名自动合并、中英标点自动全角化，并在你点击复制前用合规校验器把公众号编辑器的所有红线兜一遍。
 
+## ❤️ 赞助商
+
+> 想出现在这里？欢迎通过 [Issue](https://github.com/yan9651688/yituo-hub-studio/issues) 联系我们。
+
+<details open>
+<summary>点击折叠</summary>
+
+[![易拓 AI](docs/sponsors/yituo-ai-banner.png)](https://www.yituohub.si/)
+
+感谢 **易拓 AI** 赞助本项目！易拓 AI 提供安全、稳定、透明的 GPT、Claude 等 AI 模型 API 服务（OpenAI 兼容），支持 Codex、Claude Code / Claude 桌面版、DeepSeek 桌面版等客户端**一键配置**——运行配置命令即可自动填入密钥，无需手动粘贴，按量计费、用多少付多少；站内还提供 Skills / MCP 推荐、模型广场，以及基于 GPT Image 2 的文生图与改图。本项目的「AI 文章创作」「AI 润色」默认对接的 OpenAI 兼容 API 即可在易拓 AI 开通：👉 [www.yituohub.si](https://www.yituohub.si/)
+
+</details>
+
 ## 🌐 在线体验
 
 - **<https://studio.yituohub.com>** —— 打开首页，点「开始排版」即可
@@ -51,6 +64,7 @@
 - **富文本粘贴**：从网页 / 飞书 / Notion / Word / 公众号复制的文章直接粘进编辑器，自动转换为 Markdown（含 ==高亮==、++下划线++ 扩展语法）；剪贴板已是 Markdown 时保持原样。
 - **封面图 / 分享卡导出**：一键导出当前主题的公众号封面 PNG（900×383，2 倍清晰度）与朋友圈分享竖卡（1080×1440），分享卡可嵌入本地二维码图片。
 - **自定义配色**：每套高级排版主题在 4 套定制配色之外，可调出自己的底色 / 强调色（实时对比度提示，本地保存）。
+- **易拓 AI 中转站入口**：首页 / 工坊 / 创作页顶栏与推广条直达 [易拓 AI](https://www.yituohub.si/)，没有 API 密钥时可在那里开通（仅为链接，不影响排版功能）。
 - **AI 润色**：编辑器选中一段文字，直接润色 / 扩写 / 压缩，流式替换回原文；设置与 AI 创作页共享。
 
 ## 🤖 AI 文章创作
@@ -82,6 +96,10 @@
 <tr>
 <td width="50%" align="center"><img src="assets/landing-preview.png" width="100%"><br><sub><b>电影感首页 · 照片级雪山 + 云雾漂移 + 鼠标视差</b></sub></td>
 <td width="50%" align="center"><img src="assets/advanced-preview.png" width="100%"><br><sub><b>高级排版 · 素金手记（黑金刊读）L4 静态终稿，16 套高级排版之一</b></sub></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/studio-live.png" width="100%"><br><sub><b>排版工坊 · 左侧 Markdown，右侧公众号实时预览 + 平台合规校验</b></sub></td>
+<td width="50%" align="center"><img src="assets/create-preview.png" width="100%"><br><sub><b>AI 文章创作 · 自填 OpenAI 兼容 API，流式生成后一键去排版</b></sub></td>
 </tr>
 </table>
 
@@ -188,6 +206,10 @@ docker build -t yituo-hub-studio . && docker run -d -p 80:80 yituo-hub-studio
 ├── validator.js      公众号平台红线校验器
 ├── app.js            工坊前端（通用下拉骨架 + 并列主题库 + 原创等级选择）
 ├── motion/           Production V6（79 组 / 158 个 SVG + 32 份最终静态/动态模板）
+├── vendor/           离线 html2canvas（导出长图）
+├── assets/           首页图片、示例文章、README 截图
+├── docs/sponsors/    README 赞助商图片
+├── deploy/           nginx 站点配置示例
 ├── tools/            开发用编译与浏览器 QA 脚本（不参与上线）
 ├── test.js           Node 冒烟测试（npm test / npm run check）
 └── deploy.sh / Dockerfile / .dockerignore / deploy-files.txt / nginx.conf
