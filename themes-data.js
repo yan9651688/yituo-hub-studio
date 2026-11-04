@@ -1,6 +1,7 @@
 /* Md2GZH 主题注册数据（纯数据，与引擎分离）
- * base library: editorial / classic / fresh（18 套）
- * original library: motion（高级排版，蓝梦原创视觉 16 套）
+ * original library: motion（基础排版，蓝梦原创视觉 16 套，原「高级排版」）
+ * creative library: creative（高级排版，4 套创意排版）
+ * RETIRED_SPECS：已下线的 18 套旧基础主题（editorial / classic / fresh）
  * classic 组的配色与下划线取自原版 gzh-design-skill，组件形态为参数化复刻。
  * 加载顺序要求：本文件必须在 themes.js 之前引入（见 studio.html）。
  */
@@ -11,7 +12,9 @@
 })(typeof window !== 'undefined' ? window : globalThis, function () {
   'use strict';
 
-  var SPECS = [
+  /* 已下线的 18 套旧「基础主题」：不再出现在选择器中，仅保留给排版引擎回归测试与历史备份分支。
+   * 完整旧版见分支 backup/before-theme-restructure-20261104。 */
+  var RETIRED_SPECS = [
     /* ---------- 杂志编辑部（原创） ---------- */
     {
       id: 'ocean', name: '深海蓝', en: 'DEEP OCEAN', kickerZh: '深度长文', group: 'editorial',
@@ -180,8 +183,10 @@
       underline: 'border-bottom:2px solid #D6D3D1;font-weight:600;',
       cover: 'minimal', sectionTitle: 'line', quote: 'leftbar', toc: 'list', signature: 'line', code: 'light',
       c: { primary: '#57534E', deep: '#44403C', light: '#D6D3D1', tint: '#FAFAF9', ink: '#1C1917', text: '#44403C', sub: '#A8A29E', border: '#E7E5E4', accent: '#78716C', coverA: '#57534E', coverB: '#292524', codeBg: '#FAFAF9' }
-    },
+    }
+  ];
 
+  var SPECS = [
     /* ---------- 高级排版（蓝梦原创视觉，与 wechat-motion-layout-studio Production V6 资产配套） ---------- */
     {
       id: 'sepia-archive', name: '档案棕褐', en: 'ARCHIVE SEPIA', kickerZh: '档案手记', group: 'motion',
@@ -312,22 +317,54 @@
       underline: 'border-bottom:2px solid #C9BEDA;font-weight:600;',
       cover: 'full', sectionTitle: 'line', quote: 'gradient', toc: 'cards', signature: 'card', code: 'dark',
       c: { primary: '#705B8C', deep: '#352E3E', light: '#DDD7E1', tint: '#F7F5FA', ink: '#352E3E', text: '#4A4254', sub: '#716779', border: '#E4DFEA', accent: '#D97A4A', coverA: '#8A6FA8', coverB: '#5C4A75', codeBg: '#352E3E' }
+        },
+
+    /* ---------- 高级排版（2026.11 新增 4 套创意排版，纯静态内联结构，兼容性优先） ---------- */
+    {
+      id: 'ink-scroll', name: '水墨长卷', en: 'INK SCROLL', kickerZh: '国风长卷', group: 'creative',
+      desc: '宣纸墨色 · 竖排题签与朱印',
+      swatch: '#2B2A27', radius: '2px',
+      underline: 'border-bottom:2px solid #D9C9A8;font-weight:600;',
+      cover: 'full', sectionTitle: 'line', quote: 'tint', toc: 'list', signature: 'line', code: 'light',
+      c: { primary: '#2B2A27', deep: '#1A1917', light: '#D9C9A8', tint: '#F8F4EA', ink: '#2B2A27', text: '#4A4740', sub: '#8A8478', border: '#E3DACA', accent: '#B23A2A', coverA: '#2B2A27', coverB: '#1A1917', codeBg: '#F8F4EA' }
+    },
+    {
+      id: 'retro-gazette', name: '复古号外', en: 'RETRO GAZETTE', kickerZh: '报刊号外', group: 'creative',
+      desc: '老报纸版式 · 双线报头与引语',
+      swatch: '#9E2B25', radius: '0',
+      underline: 'border-bottom:2px solid #E2C9B2;font-weight:600;',
+      cover: 'full', sectionTitle: 'line', quote: 'leftbar', toc: 'list', signature: 'line', code: 'light',
+      c: { primary: '#9E2B25', deep: '#1F1B16', light: '#E2C9B2', tint: '#FAF6EE', ink: '#1F1B16', text: '#3D372F', sub: '#7A7064', border: '#D9CFC0', accent: '#9E2B25', coverA: '#1F1B16', coverB: '#3D372F', codeBg: '#FAF6EE' }
+    },
+    {
+      id: 'pixel-console', name: '像素游戏机', en: 'PIXEL CONSOLE', kickerZh: '闯关攻略', group: 'creative',
+      desc: '8-bit 像素 · 关卡、血条与对话框',
+      swatch: '#3B5BDB', radius: '0',
+      underline: 'border-bottom:2px solid #FFD43B;font-weight:600;',
+      cover: 'full', sectionTitle: 'bar', quote: 'leftbar', toc: 'cards', signature: 'card', code: 'dark',
+      c: { primary: '#3B5BDB', deep: '#1B1B3A', light: '#FFD43B', tint: '#F4F6FF', ink: '#1B1B3A', text: '#33334D', sub: '#6B6B8A', border: '#1B1B3A', accent: '#3B5BDB', coverA: '#3B5BDB', coverB: '#1B1B3A', codeBg: '#1B1B3A' }
+    },
+    {
+      id: 'film-strip', name: '胶片影志', en: 'FILM STRIP', kickerZh: '影像故事', group: 'creative',
+      desc: '电影胶片 · 场记板与字幕条',
+      swatch: '#C8902E', radius: '4px',
+      underline: 'border-bottom:2px solid #EBD3A4;font-weight:600;',
+      cover: 'full', sectionTitle: 'chip', quote: 'gradient', toc: 'cards', signature: 'card', code: 'dark',
+      c: { primary: '#C8902E', deep: '#1C1A17', light: '#EBD3A4', tint: '#FBF7EF', ink: '#1C1A17', text: '#3E3A33', sub: '#7D756A', border: '#E4DCCD', accent: '#C8902E', coverA: '#1C1A17', coverB: '#3E3A33', codeBg: '#1C1A17' }
     }
   ];
 
   var GROUPS = [
     { id: 'all', name: '全部' },
-    { id: 'editorial', name: '杂志编辑部' },
-    { id: 'classic', name: '经典复刻' },
-    { id: 'fresh', name: '新锐系列' },
-    { id: 'motion', name: '高级排版' }
+    { id: 'motion', name: '基础排版' },
+    { id: 'creative', name: '高级排版' }
   ];
 
-  /* 顶层资源域：基础主题与高级排版不得在选择器中混排。 */
+  /* 顶层资源域（2026.11 调整）：原 16 套「高级排版」转为基础排版；高级排版为 4 套新创意排版。 */
   var LIBRARIES = [
-    { id: 'base', name: '基础主题', shortName: '基础', en: 'BASIC THEMES', groups: ['editorial', 'classic', 'fresh'] },
-    { id: 'original', name: '高级排版', shortName: '高级排版', en: 'ADVANCED LAYOUTS', groups: ['motion'] }
+    { id: 'original', name: '基础排版', shortName: '基础', en: 'BASIC LAYOUTS', groups: ['motion'] },
+    { id: 'creative', name: '高级排版', shortName: '高级排版', en: 'ADVANCED LAYOUTS', groups: ['creative'] }
   ];
 
-  return { SPECS: SPECS, GROUPS: GROUPS, LIBRARIES: LIBRARIES };
+  return { SPECS: SPECS, RETIRED_SPECS: RETIRED_SPECS, GROUPS: GROUPS, LIBRARIES: LIBRARIES };
 });

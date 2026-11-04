@@ -35,7 +35,7 @@
 
   var state = {
     themeId: Themes.SPECS[0].id,
-    library: 'base',
+    library: 'original',
     group: 'all',
     levelId: 'motion-themed-frame',
     motionEnabled: true,
@@ -176,8 +176,13 @@
     applyPreviewLayout();
   }
 
-  function isOriginalSpec(spec) { return !!spec && spec.group === 'motion'; }
-  function currentLevel() { return OriginalData.level(state.levelId); }
+  function isOriginalSpec(spec) { return !!spec && (spec.group === 'motion' || spec.group === 'creative'); }
+  function isCreativeSpec(spec) { return !!spec && spec.group === 'creative'; }
+  /* 创意高级排版只有纯静态结构，固定按 L2 静态简洁渲染；视觉等级选择器对其隐藏 */
+  function effectiveLevelId() {
+    return isCreativeSpec(Themes.getSpec(state.themeId)) ? 'static-simple' : state.levelId;
+  }
+  function currentLevel() { return OriginalData.level(effectiveLevelId()); }
   function isDynamicLevel() { return currentLevel().motion !== 'none'; }
 
   function setLoading() {
@@ -266,14 +271,14 @@
       task = Promise.resolve(Themes.render(tokens, spec, { author: authorInput.value.trim() }));
     } else if (currentLevel().order < 3) {
       task = Promise.resolve(Originals.render(tokens, spec, {
-        author: authorInput.value.trim(), levelId: state.levelId, motionEnabled: state.motionEnabled, colorId: state.colorId
+        author: authorInput.value.trim(), levelId: effectiveLevelId(), motionEnabled: state.motionEnabled, colorId: state.colorId
       }, {}, null));
     } else {
       setLoading();
       task = ensureManifest().then(function (manifest) {
         return loadOriginalAssets(spec, manifest).then(function (assets) {
           return Originals.render(tokens, spec, {
-            author: authorInput.value.trim(), levelId: state.levelId, motionEnabled: state.motionEnabled, colorId: state.colorId
+            author: authorInput.value.trim(), levelId: effectiveLevelId(), motionEnabled: state.motionEnabled, colorId: state.colorId
           }, assets, manifest);
         });
       });
@@ -401,7 +406,7 @@
     var inLibrary = libraryThemes(library);
     var note = inLibrary.length + ' THEMES' + (library.id === 'original' ? ' · 6 LEVELS' : '');
     var html = '<div class="pop-head"><span class="pop-title">' + library.en + ' · ' + library.name + '</span><span class="pop-note">' + note + '</span></div>';
-    if (library.id === 'base') {
+    if (library.groups.length > 1) {
       html += '<div class="pop-tabs">';
       Themes.GROUPS.filter(function (group) { return group.id === 'all' || library.groups.indexOf(group.id) !== -1; }).forEach(function (group) {
         var count = group.id === 'all' ? inLibrary.length : inLibrary.filter(function (spec) { return spec.group === group.id; }).length;
@@ -454,7 +459,7 @@
 
   function renderLevelControls() {
     var button = levelDropdown.buttons[0];
-    var original = isOriginalSpec(Themes.getSpec(state.themeId));
+    var original = isOriginalSpec(Themes.getSpec(state.themeId)) && !isCreativeSpec(Themes.getSpec(state.themeId));
     levelSlot.hidden = !original;
     motionModeBtn.hidden = !original || !isDynamicLevel();
     if (!original) {
@@ -591,7 +596,13 @@
 
   function applyConfig(config) {
     if (!config) return;
-    if (config.themeId && Themes.getSpec(config.themeId)) state.themeId = config.themeId;
+    if (config.themeId && Themes.hasSpec(config.themeId)) {
+      state.themeId = config.themeId;
+    } else if (config.themeId) {
+      /* 旧「基础主题」已下线：回退到第一套基础排版，正文内容不受影响 */
+      state.themeId = Themes.SPECS[0].id;
+      toast('原主题已下线，已切换为「' + Themes.SPECS[0].name + '」');
+    }
     if (config.levelId && OriginalData.level(config.levelId)) state.levelId = config.levelId;
     state.motionEnabled = config.motionEnabled !== false;
     state.colorId = config.colorId || 'default';
@@ -1138,6 +1149,54 @@
     AiPolish.init({ editor: editor, bar: aiBar, toast: toast, scheduleConvert: scheduleConvert });
   }
 
+  /* ---------- 版本更新弹窗：每个版本只弹一次 ---------- */
+  var UPDATE_NOTICE_KEY = 'yituo-update-notice-v2026-11-04';
+  function showUpdateNotice() {
+    try { if (localStorage.getItem(UPDATE_NOTICE_KEY)) return; } catch (error) { return; }
+    var creative = Themes.SPECS.filter(isCreativeSpec);
+    if (!creative.length) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'update-notice';
+    wrap.setAttribute('role', 'dialog');
+    wrap.setAttribute('aria-modal', 'false');
+    wrap.setAttribute('aria-labelledby', 'updateNoticeTitle');
+    wrap.innerHTML = '<div class="un-card">'
+      + '<button type="button" class="un-close" aria-label="关闭">×</button>'
+      + '<div class="un-badge">NEW · 2026.11</div>'
+      + '<h3 id="updateNoticeTitle">排版库全新升级</h3>'
+      + '<p class="un-lead">原「高级排版」16 套现已成为<b>基础排版</b>，全部免费可用；新的<b>高级排版</b>上线 4 套创意风格，粘贴进公众号同样稳定：</p>'
+      + '<ul class="un-list">' + creative.map(function (spec) {
+        return '<li><span class="un-sw" style="background:' + spec.swatch + '"></span><span><b>' + spec.name + '</b><small>' + spec.desc + '</small></span></li>';
+      }).join('') + '</ul>'
+      + '<p class="un-foot">旧版 18 套基础主题已下线，已保存的草稿会自动切换到新主题，正文不受影响。</p>'
+      + '<div class="un-actions"><button type="button" class="un-later">知道了</button><button type="button" class="un-try">立即试试</button></div>'
+      + '</div>';
+    document.body.appendChild(wrap);
+    requestAnimationFrame(function () { wrap.classList.add('show'); });
+    function dismiss() {
+      try { localStorage.setItem(UPDATE_NOTICE_KEY, '1'); } catch (error) { /* 隐私模式忽略 */ }
+      wrap.classList.remove('show');
+      setTimeout(function () { if (wrap.parentNode) wrap.parentNode.removeChild(wrap); }, 260);
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(event) { if (event.key === 'Escape') dismiss(); }
+    document.addEventListener('keydown', onKey);
+    wrap.querySelector('.un-close').addEventListener('click', dismiss);
+    wrap.querySelector('.un-later').addEventListener('click', dismiss);
+    wrap.querySelector('.un-try').addEventListener('click', function () {
+      dismiss();
+      state.themeId = creative[0].id;
+      state.library = libraryForTheme(creative[0]).id;
+      state.group = 'all';
+      state.colorId = 'default';
+      renderThemeButtons();
+      renderLevelControls();
+      renderColorControls();
+      convert().catch(logConvertError);
+      toast('已切换到高级排版「' + creative[0].name + '」');
+    });
+  }
+
   editor.value = SAMPLE_MD;
   Draft.loadDraft().then(function (draft) {
     if (draft && draft.markdown && draft.markdown.trim()) {
@@ -1156,5 +1215,6 @@
     Shared.warnOnce('草稿读取失败', error);
   }).finally(function () {
     convert().catch(logConvertError);
+    showUpdateNotice();
   });
 })();
