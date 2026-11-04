@@ -9,7 +9,7 @@
 20 套基础排版（含 4 款创意新款） · 81 种分级组合 · 79 组动静态组件 · 一键复制
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
-[![Themes](https://img.shields.io/badge/themes-18%2B16-1D4ED8)](#-两个主题库18--16)
+[![Themes](https://img.shields.io/badge/themes-20-1D4ED8)](#-20-套基础排版)
 [![Advanced](https://img.shields.io/badge/高级排版-81-705B8C)](#-高级排版分级视觉)
 [![No Build](https://img.shields.io/badge/构建-零依赖-success)](#-快速开始)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-作者)
@@ -103,16 +103,14 @@
 </tr>
 </table>
 
-## 🎨 两个主题库（18 + 16）
+## 🎨 20 套基础排版
 
 | 分组 | 主题 |
 |------|------|
-| **杂志编辑部**（原创 6 套） | 深海蓝 `#1D4ED8` · 曙光橙 `#EA580C` · 星穹紫 `#7C3AED` · 鎏金黑 `#111827` · 青瓷 `#0F766E` · 绯樱 `#DB2777` |
-| **经典复刻**（致敬 [gzh-design-skill](https://github.com/isjiamu/gzh-design-skill)） | 摸鱼绿 · 红白风 · 石墨极简 · 留白禅意 · 摸鱼票据 · 橄榄手记 |
-| **新锐系列** | 摩卡 · 勃艮第 · 午夜靛蓝 · 芒果琥珀 · 湖水青 · 燕麦拿铁 |
+| **创意新款**（2026.11 新增，纯静态内联结构） | 水墨长卷 · 复古号外 · 像素游戏机 · 胶片影志 |
 | **高级排版**（蓝梦原创视觉，来自 [wechat-motion-layout-studio](https://github.com/lanmengSakura/wechat-motion-layout-studio)，16 套） | 墨红社论 · 黑金刊读 · 松烟刊读 · 珊瑚杂志 · 瑞士信号 · 柑橘报告 · 蓝图网格 · 稻纸朱砂 · 植物手记 · 柔和陶土 · 深海终端 · 雾蓝研究 · 紫灰工作室 · 新粗野 · 暗夜编辑 · 档案棕褐 |
 
-> 基础主题仍由 `themes.js` 的参数化 spec 管理；“高级排版”使用蓝梦原创的独立注册表与 Production V6 组件，避免和基础换色模板混为一类。其中「松烟刊读」为项目内自「黑金刊读」派生的姊妹篇。
+> 旧 18 套基础主题（杂志编辑部 / 经典复刻 / 新锐系列）已下线，备份于分支 `backup/before-theme-restructure-20261104`。“高级排版”使用蓝梦原创的独立注册表与 Production V6 组件，避免和基础换色模板混为一类。其中「松烟刊读」为项目内自「黑金刊读」派生的姊妹篇。
 
 ## ✨ 高级排版分级视觉
 
