@@ -38,6 +38,15 @@
     { themeId: 'sepia-archive', styleId: 'archive-sepia', name: '档案棕褐', school: 'expressive', bestFor: '案例复盘、历史、资料整理', paper: '#FFFFFF', surface: '#F8F3EA', ink: '#3A3028', muted: '#756658', accent: '#8B5B3E', accent2: '#C79C68', line: '#D4C5B0', wash: '#FBF7EF', radius: 3, border: 1, header: 'archive-folder', section: 'file-tab', brief: 'index-card', quote: 'document-stamp', finish: 'catalog-code', density: 'balanced', backgroundMode: 'white', accentOn: '#FFFFFF' }
   ];
 
+  /* 2026.11 新增「高级排版」创意主题：只走纯静态内联结构（不依赖 SVG / 冻结模板），兼容性优先。
+   * 与 PROFILES 分开存放，避免混入 16 套 Production V6 模板矩阵。 */
+  var CREATIVE_PROFILES = [
+    { themeId: 'ink-scroll', styleId: 'ink-scroll', name: '水墨长卷', school: 'creative', creative: true, bestFor: '国风、人文、传统文化', paper: '#FFFFFF', surface: '#F8F4EA', ink: '#2B2A27', muted: '#7D776B', accent: '#B23A2A', accent2: '#D9C9A8', line: '#E3DACA', radius: 2, border: 1, header: 'ink-scroll', section: 'ink-numeral', brief: 'quiet-list', quote: 'ink-quote', finish: 'ink-seal', density: 'airy', backgroundMode: 'white', accentOn: '#FFFFFF' },
+    { themeId: 'retro-gazette', styleId: 'retro-gazette', name: '复古号外', school: 'creative', creative: true, bestFor: '热点评论、资讯、观点', paper: '#FFFFFF', surface: '#FAF6EE', ink: '#1F1B16', muted: '#6F665A', accent: '#9E2B25', accent2: '#E2C9B2', line: '#CFC4B3', radius: 0, border: 1, header: 'gazette', section: 'gazette-rule', brief: 'gazette-index', quote: 'pull-quote', finish: 'gazette-end', density: 'balanced', backgroundMode: 'white', accentOn: '#FFFFFF' },
+    { themeId: 'pixel-console', styleId: 'pixel-console', name: '像素游戏机', school: 'creative', creative: true, bestFor: '教程攻略、清单、轻松科普', paper: '#FFFFFF', surface: '#F4F6FF', ink: '#1B1B3A', muted: '#5E5E7E', accent: '#3B5BDB', accent2: '#FFD43B', line: '#1B1B3A', radius: 0, border: 2, header: 'pixel-hud', section: 'pixel-level', brief: 'pixel-quest', quote: 'dialog-box', finish: 'game-clear', density: 'compact', backgroundMode: 'white', accentOn: '#FFFFFF' },
+    { themeId: 'film-strip', styleId: 'film-strip', name: '胶片影志', school: 'creative', creative: true, bestFor: '影评、故事、人物、旅行', paper: '#FFFFFF', surface: '#FBF7EF', ink: '#1C1A17', muted: '#746C60', accent: '#C8902E', accent2: '#2A2724', line: '#E4DCCD', radius: 4, border: 1, header: 'film-reel', section: 'scene-slate', brief: 'film-frames', quote: 'subtitle', finish: 'the-end', density: 'balanced', backgroundMode: 'white', accentOn: '#FFFFFF' }
+  ];
+
   /* ---------- 配色系统 ----------
    * 每套高级主题在默认配色之外提供 4 套定制配色，共 5 套可选。
    * - default 条目不携带 colors，渲染时直接使用 PROFILES 的原色；
@@ -50,6 +59,27 @@
   var COLORWAY_CORE_ROLES = ['paper', 'surface', 'ink', 'muted', 'accent', 'accent2', 'line'];
 
   var COLORWAYS = {
+    /* 创意主题：默认 + 2 套定制配色 */
+    'ink-scroll': [
+      { id: 'default', name: '默认' },
+      { id: 'dai-qing', name: '黛青', colors: { paper: '#FFFFFF', surface: '#F3F6F5', ink: '#24302E', muted: '#6C7774', accent: '#2F6F68', accent2: '#BFD3CE', line: '#D6E0DD' } },
+      { id: 'zhe-shi', name: '赭石', colors: { paper: '#FFFFFF', surface: '#FAF3EC', ink: '#33281F', muted: '#7E6F62', accent: '#9A5A2C', accent2: '#E0C5A8', line: '#E6D8C9' } }
+    ],
+    'retro-gazette': [
+      { id: 'default', name: '默认' },
+      { id: 'navy-ink', name: '藏青版', colors: { paper: '#FFFFFF', surface: '#F4F5F7', ink: '#161B26', muted: '#646B78', accent: '#23407A', accent2: '#C6CFE0', line: '#C9CED8' } },
+      { id: 'olive-ink', name: '橄榄版', colors: { paper: '#FFFFFF', surface: '#F6F6EE', ink: '#1E2016', muted: '#6B6E5C', accent: '#5C6B22', accent2: '#D5D9B8', line: '#CDCFBE' } }
+    ],
+    'pixel-console': [
+      { id: 'default', name: '默认' },
+      { id: 'game-boy', name: '掌机绿', colors: { paper: '#FFFFFF', surface: '#F1F6E9', ink: '#1F2A14', muted: '#5D6B4C', accent: '#4C7A1E', accent2: '#F2C94C', line: '#1F2A14' } },
+      { id: 'arcade-pink', name: '街机粉', colors: { paper: '#FFFFFF', surface: '#FFF2F7', ink: '#2A1530', muted: '#6E5874', accent: '#C2255C', accent2: '#4DD4E8', line: '#2A1530' } }
+    ],
+    'film-strip': [
+      { id: 'default', name: '默认' },
+      { id: 'teal-orange', name: '青橙', colors: { paper: '#FFFFFF', surface: '#F2F7F7', ink: '#14201F', muted: '#61706F', accent: '#D9772B', accent2: '#1F3A3D', line: '#D5E0DF' } },
+      { id: 'noir', name: '黑白片', colors: { paper: '#FFFFFF', surface: '#F5F5F4', ink: '#141414', muted: '#6B6B6B', accent: '#8C8C8C', accent2: '#1A1A1A', line: '#DADADA' } }
+    ],
     /* 墨红社论：默认朱砂红。黛蓝/松烟/紫棠/鎏金四个色相家族。 */
     vermilion: [
       { id: 'default', name: '默认' },
@@ -202,6 +232,7 @@
   function profileForTheme(themeId, colorId) {
     var base = null;
     for (var i = 0; i < PROFILES.length; i++) if (PROFILES[i].themeId === themeId) base = PROFILES[i];
+    for (var c = 0; c < CREATIVE_PROFILES.length; c++) if (CREATIVE_PROFILES[c].themeId === themeId) base = CREATIVE_PROFILES[c];
     if (!base) return null;
     var entry = colorwayFor(themeId, colorId || 'default');
     if (!entry || !entry.colors) return base;
@@ -267,5 +298,10 @@
     return false;
   }
 
-  return { LEVELS: LEVELS, PROFILES: PROFILES, COLORWAYS: COLORWAYS, colorwaysForTheme: colorwaysForTheme, colorwayFor: colorwayFor, profileForTheme: profileForTheme, level: level, registerColorway: registerColorway, unregisterColorway: unregisterColorway };
+  function isCreative(themeId) {
+    for (var i = 0; i < CREATIVE_PROFILES.length; i++) if (CREATIVE_PROFILES[i].themeId === themeId) return true;
+    return false;
+  }
+
+  return { LEVELS: LEVELS, PROFILES: PROFILES, CREATIVE_PROFILES: CREATIVE_PROFILES, isCreative: isCreative, COLORWAYS: COLORWAYS, colorwaysForTheme: colorwaysForTheme, colorwayFor: colorwayFor, profileForTheme: profileForTheme, level: level, registerColorway: registerColorway, unregisterColorway: unregisterColorway };
 });

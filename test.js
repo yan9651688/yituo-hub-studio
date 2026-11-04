@@ -82,16 +82,22 @@ checkConditions('offline-long-image-export', [
   ['画布边上限 16384', appSource.indexOf('maxCanvasSide = 16384') !== -1]
 ]);
 
-const baseLibrary = Themes.LIBRARIES.find(function (library) { return library.id === 'base'; });
 const originalLibrary = Themes.LIBRARIES.find(function (library) { return library.id === 'original'; });
-const baseThemeCount = Themes.SPECS.filter(function (spec) { return baseLibrary.groups.includes(spec.group); }).length;
+const creativeLibrary = Themes.LIBRARIES.find(function (library) { return library.id === 'creative'; });
 const originalThemeCount = Themes.SPECS.filter(function (spec) { return originalLibrary.groups.includes(spec.group); }).length;
-const librariesOk = baseThemeCount === 18 && originalThemeCount === 16
-  && originalLibrary.name === '高级排版' && originalLibrary.shortName === '高级排版'
-  && baseLibrary.groups.every(function (group) { return !originalLibrary.groups.includes(group); });
-console.log('theme-libraries ' + (librariesOk ? 'PASS' : 'FAIL')
-  + ' base=' + baseThemeCount + ' original=' + originalThemeCount);
-if (!librariesOk) fail = true;
+const creativeThemeCount = Themes.SPECS.filter(function (spec) { return creativeLibrary.groups.includes(spec.group); }).length;
+const baseThemeCount = Themes.RETIRED_SPECS.length;
+const baseLibrary = { groups: ['editorial', 'classic', 'fresh'] };
+checkConditions('theme-libraries', [
+  ['仅两个资源域', Themes.LIBRARIES.length === 2],
+  ['基础排版 16 套（原高级排版）', originalThemeCount === 16 && originalLibrary.name === '基础排版'],
+  ['高级排版 4 套创意', creativeThemeCount === 4 && creativeLibrary.name === '高级排版'],
+  ['旧基础主题已下线（18 套仅保留给引擎测试）', baseThemeCount === 18 && Themes.SPECS.every(function (spec) { return ['motion', 'creative'].includes(spec.group); })],
+  ['选择器总数 20', Themes.SPECS.length === 20],
+  ['已下线 id 回退到第一套', Themes.hasSpec('ocean') === false && Themes.getSpec('ocean').id === Themes.SPECS[0].id],
+  ['引擎仍能取到旧主题', Themes.getEngineSpec('ocean').id === 'ocean'],
+  ['app 对已下线主题有回退提示', appSource.indexOf('Themes.hasSpec(config.themeId)') !== -1 && appSource.indexOf('原主题已下线') !== -1]
+]);
 
 const md = fs.readFileSync(path.join(__dirname, 'assets/sample-article.md'), 'utf8');
 const tokens = Converter.parse(md);
@@ -113,7 +119,7 @@ console.log('sample-theme-placeholders ' + (appPlaceholderOk ? 'PASS' : 'FAIL')
 if (!appPlaceholderOk) fail = true;
 
 let basePlaceholderFailures = 0;
-for (const spec of Themes.SPECS.filter(function (item) { return baseLibrary.groups.includes(item.group); })) {
+for (const spec of Themes.RETIRED_SPECS) {
   const placeholderHtml = Themes.render(placeholderTokens, spec, { author: '' });
   const placeholderDoc = new JSDOM(placeholderHtml).window.document;
   const placeholderNodes = Array.from(placeholderDoc.querySelectorAll('[data-image-kind="theme-placeholder"]'));
@@ -128,7 +134,7 @@ console.log('base-theme-placeholders ' + (basePlaceholderFailures === 0 ? 'PASS'
   + ' themes=' + baseThemeCount + ' failures=' + basePlaceholderFailures);
 if (basePlaceholderFailures) fail = true;
 
-for (const spec of Themes.SPECS) {
+for (const spec of Themes.RETIRED_SPECS.concat(Themes.SPECS)) {
   const html = Themes.render(tokens, spec, { author: '张三' });
   const v = Validator.validate(html);
   const status = v.ok ? 'PASS' : 'FAIL';
@@ -138,7 +144,7 @@ for (const spec of Themes.SPECS) {
   if (!v.ok) fail = true;
 }
 
-const html0 = Themes.render(tokens, Themes.getSpec('ocean'), { author: '张三' });
+const html0 = Themes.render(tokens, Themes.getEngineSpec('ocean'), { author: '张三' });
 const counts = {
   leafSpans: (html0.match(/leaf=""/g) || []).length,
   keywordUnderline: (html0.match(/border-bottom:2px solid/g) || []).length,
@@ -151,7 +157,7 @@ console.log('sanity:', JSON.stringify(counts));
 if (counts.leafSpans < 30 || counts.keywordUnderline < 3) { console.log('SANITY FAIL'); fail = true; }
 
 /* 无 H1 / 空输入兜底 */
-const bare = Themes.render(Converter.parse('只有一段正文，**测试**兜底。'), Themes.getSpec('sakura'), {});
+const bare = Themes.render(Converter.parse('只有一段正文，**测试**兜底。'), Themes.getEngineSpec('sakura'), {});
 const bareOk = Validator.validate(bare).ok;
 console.log('fallback-cover ' + (bareOk ? 'PASS' : 'FAIL'));
 if (!bareOk) fail = true;
@@ -818,7 +824,7 @@ const featureTestsDone = (async function featureTests() {
   /* 草稿与历史（Node 无 IndexedDB，自动走内存后端） */
   const draftFailures = [];
   function draftCheck(name, ok) { if (!ok) draftFailures.push(name); }
-  const draftSpec = Themes.getSpec('ocean');
+  const draftSpec = Themes.getEngineSpec('ocean');
   await Draft.saveDraft({ markdown: '# 草稿标题\n\n正文。', config: { themeId: 'ocean', levelId: 'motion-themed-frame' } });
   const loaded = await Draft.loadDraft();
   draftCheck('草稿保存后可读回', !!loaded && loaded.markdown.indexOf('草稿标题') !== -1 && loaded.config.themeId === draftSpec.id);
@@ -959,6 +965,43 @@ for (const entry of deployFiles) {
 }
 console.log('deploy-manifest ' + (deployFailures === 0 ? 'PASS' : 'FAIL') + ' entries=' + deployFiles.length);
 if (deployFailures) fail = true;
+
+/* 2026.11 创意高级排版：4 套 × 所有等级 × 所有配色 → 纯静态内联、校验全绿、无 SVG / 外链 / 定位 */
+const creativeIds = ['ink-scroll', 'retro-gazette', 'pixel-console', 'film-strip'];
+let creativeFailures = 0;
+for (const id of creativeIds) {
+  const spec = Themes.getSpec(id);
+  if (spec.id !== id || spec.group !== 'creative' || !OriginalData.isCreative(id)) { console.log('CREATIVE FAIL spec ' + id); creativeFailures++; continue; }
+  if (OriginalVisuals.assetRequirements(id, 'motion-themed-frame', true, manifest).length !== 0) { console.log('CREATIVE FAIL assets ' + id); creativeFailures++; }
+  const colorways = OriginalData.colorwaysForTheme(id) || [];
+  if (colorways.length < 3) { console.log('CREATIVE FAIL colorways ' + id); creativeFailures++; }
+  for (const level of OriginalData.LEVELS) {
+    for (const colorway of colorways) {
+      const html = OriginalVisuals.render(tokens, spec, { author: '张三', levelId: level.id, motionEnabled: true, colorId: colorway.id }, {}, null);
+      const v = Validator.validate(html);
+      const doc = new JSDOM(html).window.document;
+      const styled = doc.querySelectorAll('[style]').length;
+      const bad = /<svg\b|<style|<script|class=|position\s*:\s*(fixed|absolute)|var\(--|display\s*:\s*grid|url\(http|@import/i.test(html);
+      if (!v.ok || bad || styled < 40 || !doc.querySelector('h1')) {
+        console.log('CREATIVE FAIL ' + id + ' ' + level.id + ' ' + colorway.id + ' ' + JSON.stringify(v.errors).slice(0, 200));
+        creativeFailures++;
+      }
+    }
+  }
+  const signature = OriginalVisuals.render(tokens, spec, { author: '张三', levelId: 'motion-themed-frame' }, {}, null);
+  const marker = { 'ink-scroll': '完', 'retro-gazette': '本期完', 'pixel-console': 'GAME CLEAR', 'film-strip': 'THE END' }[id];
+  if (signature.indexOf(marker) === -1) { console.log('CREATIVE FAIL marker ' + id); creativeFailures++; }
+}
+console.log('creative-layouts ' + (creativeFailures === 0 ? 'PASS' : 'FAIL') + ' themes=' + creativeIds.length + ' failures=' + creativeFailures);
+if (creativeFailures) fail = true;
+
+checkConditions('update-notice', [
+  ['版本化 localStorage key', appSource.indexOf("'yituo-update-notice-v2026-11-04'") !== -1],
+  ['可关闭', appSource.indexOf('un-close') !== -1 && appSource.indexOf('un-later') !== -1],
+  ['立即试试', appSource.indexOf('un-try') !== -1],
+  ['弹窗样式 + 移动端适配', stylesSource.indexOf('.update-notice') !== -1 && /@media \(max-width: 640px\) \{\s*\.update-notice/.test(stylesSource)],
+  ['创意主题隐藏视觉等级', appSource.indexOf('function effectiveLevelId()') !== -1]
+]);
 
 featureTestsDone.then(function () {
   process.exit(fail ? 1 : 0);

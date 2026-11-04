@@ -179,7 +179,172 @@
       + content + '</section>';
   }
 
+  /* ---------- 2026.11 创意高级排版（水墨长卷 / 复古号外 / 像素游戏机 / 胶片影志） ----------
+   * 只用 section/p/span/h1/h2/table + 内联样式；不用 SVG、grid、定位、外链字体，确保粘贴进公众号稳定。 */
+  function filmHoles(p, count) {
+    var h = '';
+    for (var i = 0; i < count; i++) h += '<span style="display:inline-block;width:9px;height:6px;margin:0 4px;border-radius:1px;background:' + p.paper + ';"></span>';
+    return '<p style="margin:0;padding:4px 0;background:' + p.accent2 + ';text-align:center;line-height:6px;font-size:0;white-space:nowrap;overflow:hidden;">' + h + '</p>';
+  }
+
+  function pixelBar(p, filled, total) {
+    var h = '';
+    for (var i = 0; i < total; i++) h += '<span style="display:inline-block;width:10px;height:10px;margin-right:2px;border:1px solid ' + p.ink + ';background:' + (i < filled ? p.accent2 : p.paper) + ';box-sizing:border-box;"></span>';
+    return h;
+  }
+
+  var ZH_NUM = ['壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾'];
+
+  function creativeHeader(article, p, spec) {
+    var titleHtml = text(article.title);
+    var leadHtml = inline(article.leadRaw, spec);
+    var kind = p.header;
+    if (kind === 'ink-scroll') {
+      return '<section style="padding:8px 0 30px;">'
+        + '<section style="display:flex;align-items:stretch;gap:16px;">'
+        + '<section style="flex:none;width:30px;padding:14px 0;border:1px solid ' + p.accent + ';text-align:center;box-sizing:border-box;">'
+        + '<p style="margin:0;font-family:STKaiti,KaiTi,serif;font-size:13px;line-height:1.5;color:' + p.accent + ';">' + raw('墨<br/>卷<br/>壹') + '</p></section>'
+        + '<section style="flex:1;min-width:0;padding:6px 0 0;">'
+        + '<p style="margin:0 0 14px;font-size:10px;letter-spacing:.4em;color:' + p.muted + ';">' + text('水墨长卷 · INK SCROLL') + '</p>'
+        + '<h1 style="margin:0;font-family:STKaiti,KaiTi,STSong,serif;font-size:29px;line-height:1.35;font-weight:700;color:' + p.ink + ';">' + titleHtml + '</h1>'
+        + '<p style="margin:16px 0 0;height:3px;line-height:3px;font-size:0;background:' + p.ink + ';width:56px;">' + raw('&nbsp;') + '</p>'
+        + '</section></section>'
+        + '<p style="margin:22px 0 0;padding:16px 18px;background:' + p.surface + ';border-left:2px solid ' + p.accent2 + ';font-family:STKaiti,KaiTi,serif;font-size:14.5px;line-height:2;color:' + p.muted + ';">' + leadHtml + '</p></section>';
+    }
+    if (kind === 'gazette') {
+      return '<section style="padding:0 0 26px;">'
+        + '<section style="border-top:4px solid ' + p.ink + ';border-bottom:1px solid ' + p.ink + ';padding:2px 0 0;"><section style="border-top:1px solid ' + p.ink + ';"></section></section>'
+        + '<section style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid ' + p.ink + ';font-size:9px;letter-spacing:.12em;color:' + p.muted + ';">'
+        + '<span style="font-size:9px;">' + text('VOL. 01') + '</span><span style="font-size:9px;font-weight:800;color:' + p.accent + ';">' + text('号外 · EXTRA') + '</span><span style="font-size:9px;">' + text('定价 一份关注') + '</span></section>'
+        + '<p style="margin:16px 0 4px;text-align:center;font-family:STSong,SimSun,serif;font-size:12px;letter-spacing:.6em;color:' + p.ink + ';">' + text('THE DAILY GAZETTE') + '</p>'
+        + '<h1 style="margin:6px 0 0;text-align:center;font-family:STSong,SimSun,serif;font-size:30px;line-height:1.25;font-weight:900;color:' + p.ink + ';">' + titleHtml + '</h1>'
+        + '<section style="margin:16px 0 0;border-top:1px solid ' + p.ink + ';border-bottom:3px double ' + p.ink + ';padding:12px 2px;">'
+        + '<p style="margin:0;font-family:STSong,SimSun,serif;font-size:14px;line-height:1.9;color:' + p.ink + ';text-align:justify;">' + text('【本报讯】') + leadHtml + '</p></section></section>';
+    }
+    if (kind === 'pixel-hud') {
+      return '<section style="padding:0 6px 6px 0;background:' + p.ink + ';margin-bottom:26px;">'
+        + '<section style="padding:16px 16px 18px;background:' + p.surface + ';border:2px solid ' + p.ink + ';">'
+        + '<section style="display:flex;justify-content:space-between;align-items:center;margin:0 0 14px;">'
+        + '<span style="font-family:Menlo,Consolas,monospace;font-size:10px;font-weight:900;color:' + p.accent + ';">' + text('▶ PLAYER 1') + '</span>'
+        + '<span style="font-size:0;line-height:10px;">' + pixelBar(p, 7, 8) + '</span></section>'
+        + '<h1 style="margin:0;font-size:27px;line-height:1.25;font-weight:900;color:' + p.ink + ';">' + titleHtml + '</h1>'
+        + '<p style="margin:12px 0 0;display:inline-block;padding:3px 8px;background:' + p.accent2 + ';border:2px solid ' + p.ink + ';font-family:Menlo,Consolas,monospace;font-size:10px;font-weight:900;color:' + p.ink + ';">' + text('NEW GAME · ' + article.sections.length + ' STAGES') + '</p>'
+        + '<p style="margin:16px 0 0;padding-top:12px;border-top:2px dashed ' + p.ink + ';font-size:14px;line-height:1.85;color:' + p.ink + ';">' + leadHtml + '</p></section></section>';
+    }
+    /* film-reel */
+    return '<section style="margin:0 0 26px;background:' + p.accent2 + ';border-radius:' + p.radius + 'px;overflow:hidden;">'
+      + filmHoles(p, 16)
+      + '<section style="padding:22px 20px 20px;background:' + p.accent2 + ';">'
+      + '<p style="margin:0 0 12px;font-family:Menlo,Consolas,monospace;font-size:9.5px;letter-spacing:.3em;color:' + p.accent + ';">' + text('● REC  ROLL 01 · 胶片影志') + '</p>'
+      + '<h1 style="margin:0;font-family:STSong,SimSun,serif;font-size:28px;line-height:1.3;font-weight:800;color:#FFFFFF;">' + titleHtml + '</h1>'
+      + '<p style="margin:16px 0 0;font-size:14px;line-height:1.9;color:#E9E3D8;">' + leadHtml + '</p></section>'
+      + filmHoles(p, 16) + '</section>';
+  }
+
+  function creativeBrief(article, p) {
+    var items = article.sections.slice(0, 4).map(function (section) { return section.title; });
+    if (!items.length) return '';
+    if (p.brief === 'gazette-index') {
+      return '<section style="margin:0 0 30px;border-bottom:1px solid ' + p.ink + ';">'
+        + '<p style="margin:0 0 8px;font-size:10px;font-weight:900;letter-spacing:.3em;color:' + p.accent + ';">' + text('本期要目') + '</p>'
+        + items.map(function (item, index) {
+          return '<section style="display:flex;gap:12px;padding:8px 0;border-top:1px solid ' + p.line + ';"><span style="flex:none;font-family:STSong,SimSun,serif;font-size:12px;font-weight:900;color:' + p.ink + ';">' + text('第' + ZH_NUM[index] + '版') + '</span><span style="font-family:STSong,SimSun,serif;font-size:13px;color:' + p.ink + ';">' + text(item) + '</span></section>';
+        }).join('') + '</section>';
+    }
+    if (p.brief === 'pixel-quest') {
+      return '<section style="margin:0 0 30px;padding:12px 14px;border:2px solid ' + p.ink + ';background:' + p.paper + ';">'
+        + '<p style="margin:0 0 8px;font-family:Menlo,Consolas,monospace;font-size:10px;font-weight:900;color:' + p.ink + ';">' + text('★ QUEST LOG 任务清单') + '</p>'
+        + items.map(function (item, index) {
+          return '<p style="margin:6px 0 0;font-size:13px;line-height:1.6;color:' + p.ink + ';"><span style="display:inline-block;width:12px;height:12px;margin-right:8px;border:2px solid ' + p.ink + ';background:' + (index === 0 ? p.accent2 : p.paper) + ';box-sizing:border-box;vertical-align:-1px;"></span>' + text('STAGE ' + (index + 1) + ' · ' + item) + '</p>';
+        }).join('') + '</section>';
+    }
+    if (p.brief === 'film-frames') {
+      return '<section style="display:flex;gap:6px;margin:0 0 30px;">' + items.map(function (item, index) {
+        return '<section style="flex:1;min-width:0;padding:10px 8px;border:1px solid ' + p.line + ';border-top:3px solid ' + p.accent + ';background:' + p.surface + ';">'
+          + '<p style="margin:0 0 6px;font-family:Menlo,Consolas,monospace;font-size:9px;color:' + p.accent + ';">' + text('SCENE ' + (index + 1)) + '</p>'
+          + '<p style="margin:0;font-size:12px;line-height:1.55;color:' + p.ink + ';">' + text(item) + '</p></section>';
+      }).join('') + '</section>';
+    }
+    return '<section style="margin:0 0 32px;text-align:center;">'
+      + '<p style="margin:0 0 10px;font-size:10px;letter-spacing:.4em;color:' + p.accent + ';">' + text('卷 目') + '</p>'
+      + items.map(function (item, index) {
+        return '<p style="margin:6px 0 0;font-family:STKaiti,KaiTi,serif;font-size:14px;line-height:1.7;color:' + p.ink + ';">' + text(ZH_NUM[index] + '　' + item) + '</p>';
+      }).join('') + '</section>';
+  }
+
+  function creativeSection(index, section, p) {
+    var n = index + 1;
+    var nn = n < 10 ? '0' + n : String(n);
+    if (p.section === 'ink-numeral') {
+      return '<section style="margin:42px 0 20px;text-align:center;">'
+        + '<p style="margin:0;font-family:STKaiti,KaiTi,serif;font-size:30px;line-height:1.2;color:' + p.accent + ';">' + text(ZH_NUM[index % 10]) + '</p>'
+        + '<h2 style="margin:8px 0 0;font-family:STKaiti,KaiTi,STSong,serif;font-size:20px;line-height:1.45;font-weight:700;color:' + p.ink + ';">' + text(section.title) + '</h2>'
+        + '<section style="display:flex;align-items:center;justify-content:center;margin:12px 0 0;"><span style="width:48px;height:1px;background:' + p.accent2 + ';"></span><span style="width:6px;height:6px;margin:0 8px;background:' + p.accent + ';"></span><span style="width:48px;height:1px;background:' + p.accent2 + ';"></span></section></section>';
+    }
+    if (p.section === 'gazette-rule') {
+      return '<section style="margin:38px 0 18px;">'
+        + '<section style="border-top:3px double ' + p.ink + ';"></section>'
+        + '<p style="margin:8px 0 4px;font-size:9px;font-weight:900;letter-spacing:.3em;color:' + p.accent + ';">' + text('第' + ZH_NUM[index % 10] + '版 · SECTION ' + nn) + '</p>'
+        + '<h2 style="margin:0;padding-bottom:8px;border-bottom:1px solid ' + p.ink + ';font-family:STSong,SimSun,serif;font-size:21px;line-height:1.35;font-weight:900;color:' + p.ink + ';">' + text(section.title) + '</h2></section>';
+    }
+    if (p.section === 'pixel-level') {
+      return '<section style="margin:36px 0 18px;">'
+        + '<p style="margin:0;display:inline-block;padding:4px 10px;background:' + p.ink + ';font-family:Menlo,Consolas,monospace;font-size:11px;font-weight:900;color:' + p.accent2 + ';">' + text('STAGE ' + nn) + '</p>'
+        + '<h2 style="margin:0;padding:10px 12px;border:2px solid ' + p.ink + ';background:' + p.accent + ';font-size:18px;line-height:1.4;font-weight:900;color:#FFFFFF;">' + text(section.title) + '</h2></section>';
+    }
+    /* scene-slate */
+    var stripes = '';
+    for (var i = 0; i < 8; i++) stripes += '<span style="display:inline-block;width:12.5%;height:8px;background:' + (i % 2 ? p.paper : p.accent2) + ';"></span>';
+    return '<section style="margin:38px 0 18px;border:1px solid ' + p.accent2 + ';border-radius:' + p.radius + 'px;overflow:hidden;">'
+      + '<p style="margin:0;font-size:0;line-height:8px;white-space:nowrap;">' + stripes + '</p>'
+      + '<section style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:' + p.surface + ';">'
+      + '<span style="flex:none;font-family:Menlo,Consolas,monospace;font-size:10px;font-weight:800;color:' + p.accent + ';">' + text('SCENE ' + nn) + '</span>'
+      + '<h2 style="margin:0;font-family:STSong,SimSun,serif;font-size:18px;line-height:1.4;font-weight:800;color:' + p.ink + ';">' + text(section.title) + '</h2></section></section>';
+  }
+
+  function creativeQuote(token, p) {
+    if (p.quote === 'pull-quote') {
+      return '<section data-advanced-effect="quote" style="margin:22px 8px 24px;padding:14px 4px;border-top:3px double ' + p.ink + ';border-bottom:3px double ' + p.ink + ';text-align:center;">'
+        + '<p style="margin:0;font-family:STSong,SimSun,serif;font-size:16px;line-height:1.75;font-weight:800;color:' + p.accent + ';">' + text('“' + token.text + '”') + '</p></section>';
+    }
+    if (p.quote === 'dialog-box') {
+      return '<section data-advanced-effect="quote" style="margin:20px 0 24px;padding:12px 14px;border:2px solid ' + p.ink + ';background:' + p.paper + ';">'
+        + '<p style="margin:0 0 6px;font-family:Menlo,Consolas,monospace;font-size:10px;font-weight:900;color:' + p.accent + ';">' + text('NPC ▸') + '</p>'
+        + '<p style="margin:0;font-size:13.5px;line-height:1.8;font-weight:700;color:' + p.ink + ';">' + text(token.text) + '</p>'
+        + '<p style="margin:4px 0 0;text-align:right;font-size:10px;color:' + p.accent + ';">' + text('▼') + '</p></section>';
+    }
+    if (p.quote === 'subtitle') {
+      return '<section data-advanced-effect="quote" style="margin:20px 0 24px;padding:14px 16px;background:' + p.accent2 + ';border-radius:' + p.radius + 'px;text-align:center;">'
+        + '<p style="margin:0;font-size:14px;line-height:1.8;font-weight:700;color:#FFFFFF;">' + text(token.text) + '</p>'
+        + '<p style="margin:6px 0 0;font-size:9px;letter-spacing:.3em;color:' + p.accent + ';">' + text('— SUBTITLE —') + '</p></section>';
+    }
+    return '<section data-advanced-effect="quote" style="margin:22px 0 24px;padding:6px 0 6px 16px;border-left:2px solid ' + p.accent + ';">'
+      + '<p style="margin:0;font-family:STKaiti,KaiTi,serif;font-size:15px;line-height:1.95;color:' + p.ink + ';">' + text('「' + token.text + '」') + '</p></section>';
+  }
+
+  function creativeFinish(article, p) {
+    if (p.finish === 'gazette-end') {
+      return '<section style="margin-top:40px;text-align:center;"><section style="border-top:1px solid ' + p.ink + ';border-bottom:3px double ' + p.ink + ';padding:10px 0;">'
+        + '<p style="margin:0;font-family:STSong,SimSun,serif;font-size:13px;font-weight:900;letter-spacing:.4em;color:' + p.ink + ';">' + text('— 本期完 —') + '</p>'
+        + '<p style="margin:4px 0 0;font-size:9px;letter-spacing:.2em;color:' + p.muted + ';">' + text('THE DAILY GAZETTE · 欢迎订阅下一期') + '</p></section></section>';
+    }
+    if (p.finish === 'game-clear') {
+      return '<section style="margin-top:40px;padding:16px;border:2px solid ' + p.ink + ';background:' + p.accent + ';text-align:center;">'
+        + '<p style="margin:0;font-family:Menlo,Consolas,monospace;font-size:18px;font-weight:900;letter-spacing:.1em;color:' + p.accent2 + ';">' + text('★ GAME CLEAR ★') + '</p>'
+        + '<p style="margin:6px 0 0;font-size:11px;color:#FFFFFF;">' + text('通关！点赞即可保存进度') + '</p></section>';
+    }
+    if (p.finish === 'the-end') {
+      return '<section style="margin-top:40px;background:' + p.accent2 + ';border-radius:' + p.radius + 'px;overflow:hidden;">' + filmHoles(p, 16)
+        + '<section style="padding:18px;text-align:center;"><p style="margin:0;font-family:STSong,SimSun,serif;font-size:20px;letter-spacing:.3em;color:#FFFFFF;">' + text('THE END') + '</p>'
+        + '<p style="margin:6px 0 0;font-size:10px;letter-spacing:.2em;color:' + p.accent + ';">' + text('感谢观影 · 胶片影志') + '</p></section>' + filmHoles(p, 16) + '</section>';
+    }
+    return '<section style="margin-top:42px;text-align:center;">'
+      + '<p style="margin:0;display:inline-block;padding:8px 10px;border:2px solid ' + p.accent + ';font-family:STKaiti,KaiTi,serif;font-size:16px;line-height:1.2;font-weight:700;color:' + p.accent + ';">' + text('完') + '</p>'
+      + '<p style="margin:10px 0 0;font-size:10px;letter-spacing:.4em;color:' + p.muted + ';">' + text('水墨长卷 · 感谢阅读') + '</p></section>';
+  }
+
   function header(article, p, spec) {
+    if (p.creative) return creativeHeader(article, p, spec);
     var titleHtml = text(article.title);
     var leadHtml = inline(article.leadRaw, spec);
     var nameHtml = text(p.name);
@@ -275,6 +440,7 @@
   }
 
   function brief(article, p) {
+    if (p.creative) return creativeBrief(article, p);
     var items = article.sections.slice(0, 3).map(function (section) { return section.title; });
     while (items.length < 3) items.push('延伸思考');
     if (['columns', 'number-grid', 'metric-row', 'tile-grid', 'status-grid'].indexOf(p.brief) !== -1) {
@@ -297,6 +463,7 @@
   }
 
   function sectionHeading(index, section, p) {
+    if (p.creative) return creativeSection(index, section, p);
     var n = index + 1;
     var kind = p.section;
     if (['rule-number', 'roman', 'orange-rule', 'marker-line'].indexOf(kind) !== -1) {
@@ -329,6 +496,7 @@
   }
 
   function buildAdvancedQuote(token, p) {
+    if (p.creative) return creativeQuote(token, p);
     if (['oversize', 'centered', 'ink-quote', 'spotlight'].indexOf(p.quote) !== -1) {
       return '<section data-advanced-effect="quote" style="margin:20px 0 23px;padding:16px 10px;'
         + 'border-top:1px solid ' + p.accent + ';border-bottom:1px solid ' + p.accent + ';text-align:center;">'
@@ -464,6 +632,7 @@
   }
 
   function finish(article, p) {
+    if (p.creative) return creativeFinish(article, p);
     var endTitle = article.sections.length ? article.sections[article.sections.length - 1].title : '继续前行';
     if (['black-bar', 'color-band', 'report-end'].indexOf(p.finish) !== -1) {
       return '<section style="margin-top:38px;padding:18px;background:' + p.accent + ';color:' + p.accentOn + ';"><p style="margin:0;font-size:10px;letter-spacing:.14em;">' + text('END / ' + p.name) + '</p><p style="margin:8px 0 0;font-size:15px;font-weight:800;">' + text(endTitle) + '</p></section>';
@@ -553,7 +722,7 @@
 
   function assetRequirements(themeId, levelId, motionEnabled, manifest) {
     var p = Data.profileForTheme(themeId);
-    if (!p) return [];
+    if (!p || p.creative) return [];
     var level = Data.level(levelId);
     if (level.order < 3) return [];
     var needs = [];
@@ -867,6 +1036,8 @@
     var p = Data.profileForTheme(themeSpec && themeSpec.id, opt.colorId);
     if (!p) fail('不是蓝梦原创视觉主题：' + (themeSpec && themeSpec.id));
     var level = Data.level(opt.levelId || 'motion-themed-frame');
+    /* 创意高级排版只提供纯静态结构：除 L1 黑白极简外一律按 static-simple 渲染 */
+    if (p.creative && level.id !== 'minimal-mono') level = Data.level('static-simple');
     var article = articleFromTokens(tokens);
     var spec = inlineSpec(themeSpec, p);
     if (level.id === 'minimal-mono') return renderMinimal(article, opt);
