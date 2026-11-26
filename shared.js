@@ -19,6 +19,13 @@
     return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
+  /* 创作和润色共用 API 根地址，调用时再拼接 /v1/models 或 /v1/chat/completions。 */
+  function normalizeApiBase(value) {
+    var base = String(value || '').trim().replace(/\/+$/, '').replace(/\/v1$/i, '');
+    if (!base || base.toLowerCase() === 'https://api.yituohub.com') return 'https://www.yituohub.si';
+    return base;
+  }
+
   /* 占位图协议：placeholder://16-9 | 4-5 | 2.35-1 → 比例元数据 */
   function placeholderRatio(src) {
     var match = String(src || '').toLowerCase().match(/^placeholder:\/\/(16-9|4-5|2\.35-1)$/);
@@ -83,6 +90,7 @@
   return {
     esc: esc,
     escapeRegExp: escapeRegExp,
+    normalizeApiBase: normalizeApiBase,
     placeholderRatio: placeholderRatio,
     TRAFFIC_LIGHTS: TRAFFIC_LIGHTS,
     trafficLightsHtml: trafficLightsHtml,

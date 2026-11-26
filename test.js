@@ -89,13 +89,23 @@ const baseThemeCount = Themes.RETIRED_SPECS.length;
 const baseLibrary = { groups: ['editorial', 'classic', 'fresh'] };
 checkConditions('theme-libraries', [
   ['仅一个资源域：基础排版', Themes.LIBRARIES.length === 1 && originalLibrary.name === '基础排版'],
-  ['基础排版 20 套（16 原高级 + 4 创意）', originalThemeCount === 20 && creativeThemeCount === 4],
+  ['基础排版 21 套（16 原高级 + 5 创意）', originalThemeCount === 21 && creativeThemeCount === 5],
   ['无「高级排版」库', Themes.LIBRARIES.every(function (l) { return l.name !== '高级排版'; })],
   ['旧基础主题已下线（18 套仅保留给引擎测试）', baseThemeCount === 18 && Themes.SPECS.every(function (spec) { return ['motion', 'creative'].includes(spec.group); })],
-  ['选择器总数 20', Themes.SPECS.length === 20],
+  ['选择器总数 21', Themes.SPECS.length === 21],
   ['已下线 id 回退到第一套', Themes.hasSpec('ocean') === false && Themes.getSpec('ocean').id === Themes.SPECS[0].id],
   ['引擎仍能取到旧主题', Themes.getEngineSpec('ocean').id === 'ocean'],
   ['app 对已下线主题有回退提示', appSource.indexOf('Themes.hasSpec(config.themeId)') !== -1 && appSource.indexOf('原主题已下线') !== -1]
+]);
+
+checkConditions('relay-base-migration', [
+  ['新用户使用新域名', Shared.normalizeApiBase() === 'https://www.yituohub.si'],
+  ['旧默认地址与 /v1 迁到新域名', ['', 'https://api.yituohub.com', ' https://API.yituohub.com/v1/ '].every(function (value) {
+    return Shared.normalizeApiBase(value) === 'https://www.yituohub.si';
+  })],
+  ['自定义前缀保留，/v1 由两个功能各自拼接一次', Shared.normalizeApiBase('https://relay.example/team/v1/') === 'https://relay.example/team'],
+  ['旧域名上的自定义路径保留', Shared.normalizeApiBase('https://api.yituohub.com/team') === 'https://api.yituohub.com/team'],
+  ['相似域名保留', Shared.normalizeApiBase('https://api.yituohub.com.example') === 'https://api.yituohub.com.example']
 ]);
 
 const md = fs.readFileSync(path.join(__dirname, 'assets/sample-article.md'), 'utf8');
@@ -965,8 +975,8 @@ for (const entry of deployFiles) {
 console.log('deploy-manifest ' + (deployFailures === 0 ? 'PASS' : 'FAIL') + ' entries=' + deployFiles.length);
 if (deployFailures) fail = true;
 
-/* 2026.11 创意高级排版：4 套 × 所有等级 × 所有配色 → 纯静态内联、校验全绿、无 SVG / 外链 / 定位 */
-const creativeIds = ['ink-scroll', 'retro-gazette', 'pixel-console', 'film-strip'];
+/* 创意排版 × 所有等级 × 所有配色 → 纯静态内联、校验全绿、无 SVG / 外链 / 定位 */
+const creativeIds = Themes.SPECS.filter(function (spec) { return spec.group === 'creative'; }).map(function (spec) { return spec.id; });
 let creativeFailures = 0;
 for (const id of creativeIds) {
   const spec = Themes.getSpec(id);
@@ -988,14 +998,28 @@ for (const id of creativeIds) {
     }
   }
   const signature = OriginalVisuals.render(tokens, spec, { author: '张三', levelId: 'motion-themed-frame' }, {}, null);
-  const marker = { 'ink-scroll': '完', 'retro-gazette': '本期完', 'pixel-console': 'GAME CLEAR', 'film-strip': 'THE END' }[id];
+  const marker = { 'ink-scroll': '完', 'retro-gazette': '本期完', 'pixel-console': 'GAME CLEAR', 'film-strip': 'THE END', 'tide-journal': '潮汐手札 · 感谢阅读' }[id];
   if (signature.indexOf(marker) === -1) { console.log('CREATIVE FAIL marker ' + id); creativeFailures++; }
 }
 console.log('creative-layouts ' + (creativeFailures === 0 ? 'PASS' : 'FAIL') + ' themes=' + creativeIds.length + ' failures=' + creativeFailures);
 if (creativeFailures) fail = true;
 
+const tideSpec = Themes.getSpec('tide-journal');
+const tideRoot = new DOMParser().parseFromString(OriginalVisuals.render(tokens, tideSpec), 'text/html').body.firstElementChild;
+checkConditions('tide-journal', [
+  ['双线刊头', tideRoot.firstElementChild.style.borderTopStyle === 'double'],
+  ['分镜章节与竖线引文', tideRoot.textContent.includes('SCENE 02') && tideRoot.querySelector('[data-advanced-effect="quote"]').style.borderLeftStyle === 'solid'],
+  ['长标题与引文可在窄屏内换行', tideRoot.style.width === '100%' && parseFloat(tideRoot.style.minWidth) === 0 && tideRoot.style.overflowWrap === 'anywhere'],
+  ['各配色的正文、标签和引文清晰可读', OriginalData.colorwaysForTheme(tideSpec.id).every(function (entry) {
+    const p = OriginalData.profileForTheme(tideSpec.id, entry.id);
+    return [p.ink, p.muted, p.accent, p.accent2].every(function (color) {
+      return Shared.colorContrast(color, p.surface) >= 4.5 && Shared.colorContrast(color, p.paper) >= 4.5;
+    });
+  })]
+]);
+
 checkConditions('update-notice', [
-  ['版本化 localStorage key', appSource.indexOf("'yituo-update-notice-v2026-11-04b'") !== -1],
+  ['版本化 localStorage key', appSource.indexOf("'yituo-update-notice-v2026-11-26'") !== -1],
   ['可关闭', appSource.indexOf('un-close') !== -1 && appSource.indexOf('un-later') !== -1],
   ['立即试试', appSource.indexOf('un-try') !== -1],
   ['弹窗样式 + 移动端适配', stylesSource.indexOf('.update-notice') !== -1 && /@media \(max-width: 640px\) \{\s*\.update-notice/.test(stylesSource)],

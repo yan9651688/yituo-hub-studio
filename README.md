@@ -6,10 +6,10 @@
 
 **把 Markdown 一键排成可直接粘贴进微信公众号编辑器的精致 HTML**
 
-20 套基础排版（含 4 款创意新款） · 81 种分级组合 · 79 组动静态组件 · 一键复制
+21 套基础排版（含 5 款创意主题） · 81 种分级组合 · 79 组动静态组件 · 一键复制
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
-[![Themes](https://img.shields.io/badge/themes-20-1D4ED8)](#-20-套基础排版)
+[![Themes](https://img.shields.io/badge/themes-21-1D4ED8)](#-21-套基础排版)
 [![Advanced](https://img.shields.io/badge/高级排版-81-705B8C)](#-高级排版分级视觉)
 [![No Build](https://img.shields.io/badge/构建-零依赖-success)](#-快速开始)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-作者)
@@ -46,10 +46,10 @@
 
 ## ✨ 核心特性
 
-- **AI 文章创作**：填入你自己的 OpenAI 兼容 API（默认 `https://api.yituohub.com/`），模型列表自动拉取；六种文章类型 + 自定义 prompt、三档篇幅 + 自定义字数，流式生成公众号文章 Markdown，一键送进排版工坊。
+- **AI 文章创作**：填入你自己的 OpenAI 兼容 API（默认 `https://www.yituohub.si/`），模型列表自动拉取；六种文章类型 + 自定义 prompt、三档篇幅 + 自定义字数，流式生成公众号文章 Markdown，一键送进排版工坊。
 - **配图零门槛**：Ctrl+V 粘贴截图 / 拖入 / 选文件，自动压缩转 base64 内联进文章，不依赖图床；也支持自建图床（兰空 / EasyImage / sm.ms 风格）自动上传换外链，上传失败自动回退 base64。
 - **生图工作台**：顶栏一键直达 `studio.yituohub.com/gen/`，注册绑定自己的 Yi Tuo Hub 密钥，用 gpt-image-2 系列模型文生图、参考图改图，文章封面与配图直接出图。
-- **两个并列主题库（2026.11 调整）**：原 16 套高级排版（蓝梦原创视觉）并入「基础排版」，并新增 4 款创意排版——水墨长卷 · 复古号外 · 像素游戏机 · 胶片影志（纯静态内联结构，兼容性优先），共 20 套，只保留一个主题库。旧 18 套基础主题已下线，备份于分支 `backup/before-theme-restructure-20261104`。
+- **基础排版主题库**收录 16 套蓝梦原创视觉和 5 款静态创意主题。新款「潮汐手札」默认用孔雀青，结合复古号外的双线刊头、胶片影志的分镜章节与水墨长卷的竖线引文。旧 18 套基础主题备份于分支 `backup/before-theme-restructure-20261104`。
 - **六档高级排版**：“高级排版”库提供 L1 黑白极简单例，以及 16 套主题各自的 L2–L6；静态简约、静态标题栏、静态主题场景、标题动效和完整主题动效都在原 Studio 内切换。
 - **动态 / 静态成对**：L5、L6 可直接切换为几何一致的静态回退；正文、章节文字始终保持普通可编辑 HTML。
 - **终稿结构不重造**：L4–L6 直接以冻结的 V24 静态终稿和其 V6 动态派生模板为结构源；标题、导读框、目录、章节装饰与尾部 `content_anchor` 原样保留，只替换 Markdown 文本槽。
@@ -71,7 +71,7 @@
 
 打开 <https://studio.yituohub.com/create.html>（或首页「先 AI 写一篇」），填入你自己的 API 密钥即可开始创作：
 
-- **自带 API 才能创作**：默认请求 `https://api.yituohub.com/`（OpenAI 兼容），地址可改；模型列表从 `/v1/models` 自动拉取。密钥只存在你浏览器 localStorage，浏览器直连你填写的 API，本站不中转、不落地。
+- **自带 API 才能创作**：默认请求 `https://www.yituohub.si/`（OpenAI 兼容），地址可改。创作与润色共用设置，已保存的旧默认地址自动迁移。模型列表从 `/v1/models` 自动拉取。密钥只存在你浏览器 localStorage，浏览器直连你填写的 API，本站不中转、不落地。
 - **类型与篇幅**：深度长文 / 实用干货 / 观点评论 / 案例拆解 / 热点解读 / 个人随笔 六种内置类型，也支持「自定义」类型 prompt；篇幅三档之外可填任意字数（如「约 2200 字」）。
 - **流式生成 + 续写**：边生成边看字数，可随时停止；「追加模式」在已有文章后继续写。
 - **配图两条路**：粘贴/拖入的截图自动压到最长边 1600px 后转 base64 内联（无需图床）；配置图床后自动上传换外链（兼容兰空 / EasyImage / sm.ms 风格的返回格式，密钥发送方式可选），失败自动回退 base64。
@@ -103,11 +103,11 @@
 </tr>
 </table>
 
-## 🎨 20 套基础排版
+## 🎨 21 套基础排版
 
 | 分组 | 主题 |
 |------|------|
-| **创意新款**（2026.11 新增，纯静态内联结构） | 水墨长卷 · 复古号外 · 像素游戏机 · 胶片影志 |
+| **创意新款**（纯静态内联结构） | 水墨长卷 · 复古号外 · 像素游戏机 · 胶片影志 · 潮汐手札 |
 | **高级排版**（蓝梦原创视觉，来自 [wechat-motion-layout-studio](https://github.com/lanmengSakura/wechat-motion-layout-studio)，16 套） | 墨红社论 · 黑金刊读 · 松烟刊读 · 珊瑚杂志 · 瑞士信号 · 柑橘报告 · 蓝图网格 · 稻纸朱砂 · 植物手记 · 柔和陶土 · 深海终端 · 雾蓝研究 · 紫灰工作室 · 新粗野 · 暗夜编辑 · 档案棕褐 |
 
 > 旧 18 套基础主题（杂志编辑部 / 经典复刻 / 新锐系列）已下线，备份于分支 `backup/before-theme-restructure-20261104`。“高级排版”使用蓝梦原创的独立注册表与 Production V6 组件，避免和基础换色模板混为一类。其中「松烟刊读」为项目内自「黑金刊读」派生的姊妹篇。
@@ -196,7 +196,7 @@ docker build -t yituo-hub-studio . && docker run -d -p 80:80 yituo-hub-studio
 ├── rich-paste.js     富文本粘贴 → Markdown 桥接
 ├── cards.js          封面图 / 分享卡固定尺寸渲染器
 ├── ai-polish.js      studio 侧 AI 润色（复用创作页 API 设置）
-├── themes-data.js    34 套主题注册数据（纯数据，与引擎分离）
+├── themes-data.js    基础主题与历史主题注册数据（纯数据，与引擎分离）
 ├── themes.js         基础主题引擎与通用排版组件
 ├── original-visuals-data.js  16 套原创主题与 6 档等级注册表
 ├── original-visuals.js       原创完整文章组合与动静态回退渲染器

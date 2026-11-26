@@ -166,7 +166,7 @@ async function main() {
 
     await poll(function () {
       return evaluate('document.readyState === "complete" && typeof window.html2canvas === "function"'
-        + ' && !!document.getElementById("btnExportImage") && !!document.getElementById("preview").contentDocument.body');
+        + ' && !!document.getElementById("btnExportImage") && !!document.getElementById("preview").contentDocument.querySelector("body[data-preview-scale] h1")');
     }, 12000, '工坊与离线长图组件初始化');
 
     const expected = await evaluate('(function(){var doc=document.getElementById("preview").contentDocument,target=doc.body;'

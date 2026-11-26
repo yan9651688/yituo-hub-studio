@@ -174,12 +174,13 @@
     return '<section data-original-system="production-v6" data-original-level="' + esc(levelId)
       + '" data-original-style="' + esc(p.styleId)
       + '" style="max-width:750px;margin:0 auto;padding:' + pad + ';box-sizing:border-box;'
+      + (p.creative ? 'width:100%;min-width:0;word-wrap:break-word;overflow-wrap:anywhere;' : '')
       + canvasStyle(p) + ';color:' + p.ink
       + ';font-family:-apple-system,BlinkMacSystemFont,\'PingFang SC\',\'Microsoft YaHei\',sans-serif;">'
       + content + '</section>';
   }
 
-  /* ---------- 2026.11 创意高级排版（水墨长卷 / 复古号外 / 像素游戏机 / 胶片影志） ----------
+  /* ---------- 静态创意排版 ----------
    * 只用 section/p/span/h1/h2/table + 内联样式；不用 SVG、grid、定位、外链字体，确保粘贴进公众号稳定。 */
   function filmHoles(p, count) {
     var h = '';
@@ -199,6 +200,14 @@
     var titleHtml = text(article.title);
     var leadHtml = inline(article.leadRaw, spec);
     var kind = p.header;
+    if (kind === 'tidal-masthead') {
+      return '<section style="margin:0 0 28px;padding:19px 18px 22px;border-top:6px double ' + p.accent
+        + ';border-bottom:1px solid ' + p.line + ';background:' + p.surface + ';">'
+        + '<p style="margin:0 0 12px;font-size:11px;font-weight:700;letter-spacing:.14em;color:' + p.accent + ';">' + text(p.name + ' · ' + spec.en) + '</p>'
+        + '<h1 style="margin:0;font-family:STSong,SimSun,serif;font-size:29px;line-height:1.4;color:' + p.ink + ';">' + titleHtml + '</h1>'
+        + (article.leadRaw ? '<p style="margin:14px 0 0;font-size:15px;line-height:1.85;color:' + p.muted + ';">' + leadHtml + '</p>' : '')
+        + '</section>';
+    }
     if (kind === 'ink-scroll') {
       return '<section style="padding:8px 0 30px;">'
         + '<section style="display:flex;align-items:stretch;gap:16px;">'
@@ -340,7 +349,7 @@
     }
     return '<section style="margin-top:42px;text-align:center;">'
       + '<p style="margin:0;display:inline-block;padding:8px 10px;border:2px solid ' + p.accent + ';font-family:STKaiti,KaiTi,serif;font-size:16px;line-height:1.2;font-weight:700;color:' + p.accent + ';">' + text('完') + '</p>'
-      + '<p style="margin:10px 0 0;font-size:10px;letter-spacing:.4em;color:' + p.muted + ';">' + text('水墨长卷 · 感谢阅读') + '</p></section>';
+      + '<p style="margin:10px 0 0;font-size:10px;letter-spacing:.4em;color:' + p.muted + ';">' + text(p.name + ' · 感谢阅读') + '</p></section>';
   }
 
   function header(article, p, spec) {

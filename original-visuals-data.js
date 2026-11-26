@@ -44,7 +44,8 @@
     { themeId: 'ink-scroll', styleId: 'ink-scroll', name: '水墨长卷', school: 'creative', creative: true, bestFor: '国风、人文、传统文化', paper: '#FFFFFF', surface: '#F8F4EA', ink: '#2B2A27', muted: '#7D776B', accent: '#B23A2A', accent2: '#D9C9A8', line: '#E3DACA', radius: 2, border: 1, header: 'ink-scroll', section: 'ink-numeral', brief: 'quiet-list', quote: 'ink-quote', finish: 'ink-seal', density: 'airy', backgroundMode: 'white', accentOn: '#FFFFFF' },
     { themeId: 'retro-gazette', styleId: 'retro-gazette', name: '复古号外', school: 'creative', creative: true, bestFor: '热点评论、资讯、观点', paper: '#FFFFFF', surface: '#FAF6EE', ink: '#1F1B16', muted: '#6F665A', accent: '#9E2B25', accent2: '#E2C9B2', line: '#CFC4B3', radius: 0, border: 1, header: 'gazette', section: 'gazette-rule', brief: 'gazette-index', quote: 'pull-quote', finish: 'gazette-end', density: 'balanced', backgroundMode: 'white', accentOn: '#FFFFFF' },
     { themeId: 'pixel-console', styleId: 'pixel-console', name: '像素游戏机', school: 'creative', creative: true, bestFor: '教程攻略、清单、轻松科普', paper: '#FFFFFF', surface: '#F4F6FF', ink: '#1B1B3A', muted: '#5E5E7E', accent: '#3B5BDB', accent2: '#FFD43B', line: '#1B1B3A', radius: 0, border: 2, header: 'pixel-hud', section: 'pixel-level', brief: 'pixel-quest', quote: 'dialog-box', finish: 'game-clear', density: 'compact', backgroundMode: 'white', accentOn: '#FFFFFF' },
-    { themeId: 'film-strip', styleId: 'film-strip', name: '胶片影志', school: 'creative', creative: true, bestFor: '影评、故事、人物、旅行', paper: '#FFFFFF', surface: '#FBF7EF', ink: '#1C1A17', muted: '#746C60', accent: '#C8902E', accent2: '#2A2724', line: '#E4DCCD', radius: 4, border: 1, header: 'film-reel', section: 'scene-slate', brief: 'film-frames', quote: 'subtitle', finish: 'the-end', density: 'balanced', backgroundMode: 'white', accentOn: '#FFFFFF' }
+    { themeId: 'film-strip', styleId: 'film-strip', name: '胶片影志', school: 'creative', creative: true, bestFor: '影评、故事、人物、旅行', paper: '#FFFFFF', surface: '#FBF7EF', ink: '#1C1A17', muted: '#746C60', accent: '#C8902E', accent2: '#2A2724', line: '#E4DCCD', radius: 4, border: 1, header: 'film-reel', section: 'scene-slate', brief: 'film-frames', quote: 'subtitle', finish: 'the-end', density: 'balanced', backgroundMode: 'white', accentOn: '#FFFFFF' },
+    { themeId: 'tide-journal', styleId: 'tide-journal', name: '潮汐手札', school: 'creative', creative: true, bestFor: '旅行、人物、观察随笔', paper: '#FFFFFF', surface: '#EFF7F5', ink: '#122F34', muted: '#47636A', accent: '#086C70', accent2: '#49736C', line: '#BCD4D0', radius: 3, border: 1, header: 'tidal-masthead', section: 'scene-slate', brief: 'quiet-list', quote: 'ink-quote', finish: 'ink-seal', density: 'balanced', backgroundMode: 'white', accentOn: '#FFFFFF' }
   ];
 
   /* ---------- 配色系统 ----------
@@ -60,6 +61,11 @@
 
   var COLORWAYS = {
     /* 创意主题：默认 + 2 套定制配色 */
+    'tide-journal': [
+      { id: 'default', name: '孔雀青' },
+      { id: 'tide-blue', name: '潮蓝', colors: { paper: '#FFFFFF', surface: '#F1F6FA', ink: '#1B3043', muted: '#4C6273', accent: '#2E6084', accent2: '#526F84', line: '#C5D4DF' } },
+      { id: 'sea-pine', name: '海松', colors: { paper: '#FFFFFF', surface: '#F3F7EF', ink: '#253523', muted: '#52634E', accent: '#45663E', accent2: '#5A7154', line: '#CAD7C1' } }
+    ],
     'ink-scroll': [
       { id: 'default', name: '默认' },
       { id: 'dai-qing', name: '黛青', colors: { paper: '#FFFFFF', surface: '#F3F6F5', ink: '#24302E', muted: '#6C7774', accent: '#2F6F68', accent2: '#BFD3CE', line: '#D6E0DD' } },
