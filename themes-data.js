@@ -1,6 +1,6 @@
 /* Md2GZH 主题注册数据（纯数据，与引擎分离）
  * original library: motion（基础排版，蓝梦原创视觉 16 套，原「高级排版」）
- * creative library: creative（高级排版，4 套创意排版）
+ * creative group: creative（基础排版中的静态创意主题）
  * RETIRED_SPECS：已下线的 18 套旧基础主题（editorial / classic / fresh）
  * classic 组的配色与下划线取自原版 gzh-design-skill，组件形态为参数化复刻。
  * 加载顺序要求：本文件必须在 themes.js 之前引入（见 studio.html）。
@@ -319,7 +319,7 @@
       c: { primary: '#705B8C', deep: '#352E3E', light: '#DDD7E1', tint: '#F7F5FA', ink: '#352E3E', text: '#4A4254', sub: '#716779', border: '#E4DFEA', accent: '#D97A4A', coverA: '#8A6FA8', coverB: '#5C4A75', codeBg: '#352E3E' }
         },
 
-    /* ---------- 基础排版（2026.11 新增 4 套创意排版，纯静态内联结构，兼容性优先） ---------- */
+    /* ---------- 创意新款（纯静态内联结构） ---------- */
     {
       id: 'ink-scroll', name: '水墨长卷', en: 'INK SCROLL', kickerZh: '国风长卷', group: 'creative',
       desc: '宣纸墨色 · 竖排题签与朱印',
@@ -351,6 +351,14 @@
       underline: 'border-bottom:2px solid #EBD3A4;font-weight:600;',
       cover: 'full', sectionTitle: 'chip', quote: 'gradient', toc: 'cards', signature: 'card', code: 'dark',
       c: { primary: '#C8902E', deep: '#1C1A17', light: '#EBD3A4', tint: '#FBF7EF', ink: '#1C1A17', text: '#3E3A33', sub: '#7D756A', border: '#E4DCCD', accent: '#C8902E', coverA: '#1C1A17', coverB: '#3E3A33', codeBg: '#1C1A17' }
+    },
+    {
+      id: 'tide-journal', name: '潮汐手札', en: 'TIDE JOURNAL', kickerZh: '旅行观察', group: 'creative',
+      desc: '孔雀青 · 双线刊头与分镜章节',
+      swatch: '#086C70', radius: '3px',
+      underline: 'border-bottom:2px solid #49736C;font-weight:600;',
+      cover: 'minimal', sectionTitle: 'line', quote: 'leftbar', toc: 'list', signature: 'line', code: 'light',
+      c: { primary: '#086C70', deep: '#122F34', light: '#49736C', tint: '#EFF7F5', ink: '#122F34', text: '#264349', sub: '#47636A', border: '#BCD4D0', accent: '#086C70', coverA: '#086C70', coverB: '#122F34', codeBg: '#EFF7F5' }
     }
   ];
 
@@ -360,7 +368,7 @@
     { id: 'creative', name: '创意新款' }
   ];
 
-  /* 顶层资源域（2026.11 调整）：原 16 套「高级排版」转为基础排版；高级排版为 4 套新创意排版。 */
+  /* 基础排版主题库包含分级视觉和静态创意两个分组。 */
   var LIBRARIES = [
     { id: 'original', name: '基础排版', shortName: '基础', en: 'BASIC LAYOUTS', groups: ['motion', 'creative'] }
   ];

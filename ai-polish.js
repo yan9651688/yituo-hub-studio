@@ -12,7 +12,6 @@
   'use strict';
 
   var LS = { base: 'yth.create.base', key: 'yth.create.key', model: 'yth.create.model' };
-  var DEFAULT_BASE = 'https://api.yituohub.com';
 
   var ACTIONS = [
     { id: 'polish', name: '润色', brief: '保持原意与篇幅量级，让文字更自然、更有作者个人声口' },
@@ -35,18 +34,19 @@
   }
 
   function settings() {
-    var saved = { base: DEFAULT_BASE, key: '', model: '' };
+    var saved = { base: '', key: '', model: '' };
     try {
-      saved.base = localStorage.getItem(LS.base) || DEFAULT_BASE;
+      saved.base = localStorage.getItem(LS.base);
       saved.key = localStorage.getItem(LS.key) || '';
       saved.model = localStorage.getItem(LS.model) || '';
     } catch (error) { /* 隐私模式：仅本次会话可用 */ }
+    saved.base = Shared.normalizeApiBase(saved.base);
     return saved;
   }
 
   function saveSettings(next) {
     try {
-      if (next.base) localStorage.setItem(LS.base, next.base.trim().replace(/\/+$/, ''));
+      if (typeof next.base === 'string') localStorage.setItem(LS.base, Shared.normalizeApiBase(next.base));
       if (typeof next.key === 'string') localStorage.setItem(LS.key, next.key.trim());
       if (typeof next.model === 'string') localStorage.setItem(LS.model, next.model.trim());
     } catch (error) { return false; }
@@ -80,7 +80,7 @@
     var produced = '';
     var decoder = new TextDecoder();
     var buffer = '';
-    return fetch(conf.base.replace(/\/+$/, '') + '/v1/chat/completions', {
+    return fetch(conf.base + '/v1/chat/completions', {
       method: 'POST',
       signal: controller.signal,
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + conf.key },

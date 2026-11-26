@@ -345,7 +345,7 @@
 
   function closeOpenDropdown() { if (openDropdown) openDropdown.close(); }
 
-  /* ---------- 主题库下拉（基础排版 20 套） ---------- */
+  /* ---------- 基础排版主题库下拉 ---------- */
 
   function libraryThemes(library) {
     return Themes.SPECS.filter(function (spec) { return library.groups.indexOf(spec.group) !== -1; });
@@ -561,7 +561,7 @@
   }
 
   function renderColorPop() {
-    var colorways = currentColorways();
+    var colorways = currentColorways().filter(function (colorway) { return colorway.id !== 'custom'; });
     var spec = Themes.getSpec(state.themeId);
     var html = '<div class="level-pop-head"><span class="pop-title">COLORWAYS · 主题配色</span><span class="pop-note">' + colorways.length + ' PALETTES</span></div><div class="color-list">';
     colorways.forEach(function (colorway) {
@@ -572,7 +572,8 @@
       html += '<button class="color-option' + (state.colorId === 'custom' ? ' active' : '') + '" data-color="custom"><span class="color-chip-dots large">' + colorwayDots(custom) + '</span><span class="color-copy"><strong>自定义</strong><small>' + spec.name + ' · 我的配色</small></span></button>';
     }
     html += '<button class="color-option color-option-edit" data-color="__edit__"><span class="color-copy"><strong>✎ 自定义配色…</strong><small>调出自己的底色与强调色</small></span></button>';
-    html += '</div><p class="level-footnote">每套主题附带 4 套定制配色 + 1 套自定义；L2–L6 全等级生效，L1 黑白极简不参与配色。</p>';
+    html += '</div>';
+    if (!isCreativeSpec(spec)) html += '<p class="level-footnote">配色适用于 L2–L6，L1 使用黑白排版。</p>';
     var pop = colorDropdown.pop;
     pop.innerHTML = html;
     pop.querySelectorAll('.color-option').forEach(function (option) {
@@ -1150,11 +1151,11 @@
   }
 
   /* ---------- 版本更新弹窗：每个版本只弹一次 ---------- */
-  var UPDATE_NOTICE_KEY = 'yituo-update-notice-v2026-11-04b';
+  var UPDATE_NOTICE_KEY = 'yituo-update-notice-v2026-11-26';
   function showUpdateNotice() {
     try { if (localStorage.getItem(UPDATE_NOTICE_KEY)) return; } catch (error) { return; }
-    var creative = Themes.SPECS.filter(isCreativeSpec);
-    if (!creative.length) return;
+    if (!Themes.hasSpec('tide-journal')) return;
+    var featured = Themes.getSpec('tide-journal');
     var wrap = document.createElement('div');
     wrap.className = 'update-notice';
     wrap.setAttribute('role', 'dialog');
@@ -1162,13 +1163,9 @@
     wrap.setAttribute('aria-labelledby', 'updateNoticeTitle');
     wrap.innerHTML = '<div class="un-card">'
       + '<button type="button" class="un-close" aria-label="关闭">×</button>'
-      + '<div class="un-badge">NEW · 2026.11</div>'
-      + '<h3 id="updateNoticeTitle">排版库全新升级</h3>'
-      + '<p class="un-lead">旧基础排版已下线，原「高级排版」16 套已并入<b>基础排版</b>，并新增 4 款创意排版，共 20 套，粘贴进公众号同样稳定：</p>'
-      + '<ul class="un-list">' + creative.map(function (spec) {
-        return '<li><span class="un-sw" style="background:' + spec.swatch + '"></span><span><b>' + spec.name + '</b><small>' + spec.desc + '</small></span></li>';
-      }).join('') + '</ul>'
-      + '<p class="un-foot">已保存的草稿若使用已下线的旧主题，会自动切换到新主题，正文不受影响。</p>'
+      + '<h3 id="updateNoticeTitle">新排版 · ' + featured.name + '</h3>'
+      + '<p class="un-lead">孔雀青双线刊头配分镜编号，适合旅行记录与人物随笔。试用即可预览当前文章。</p>'
+      + '<p class="un-foot">AI 创作与润色的默认中转站已迁至 www.yituohub.si。</p>'
       + '<div class="un-actions"><button type="button" class="un-later">知道了</button><button type="button" class="un-try">立即试试</button></div>'
       + '</div>';
     document.body.appendChild(wrap);
@@ -1185,15 +1182,15 @@
     wrap.querySelector('.un-later').addEventListener('click', dismiss);
     wrap.querySelector('.un-try').addEventListener('click', function () {
       dismiss();
-      state.themeId = creative[0].id;
-      state.library = libraryForTheme(creative[0]).id;
+      state.themeId = featured.id;
+      state.library = libraryForTheme(featured).id;
       state.group = 'all';
       state.colorId = 'default';
       renderThemeButtons();
       renderLevelControls();
       renderColorControls();
       convert().catch(logConvertError);
-      toast('已切换到新款「' + creative[0].name + '」');
+      toast('已切换到新款「' + featured.name + '」');
     });
   }
 

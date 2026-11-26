@@ -1,5 +1,5 @@
 /* YI TUO HUB STUDIO · AI 文章创作
- * 直连用户填写的 OpenAI 兼容 API（默认 https://api.yituohub.com/）：
+ * 直连用户填写的 OpenAI 兼容 API：
  * - GET  {base}/v1/models          载入模型列表
  * - POST {base}/v1/chat/completions 流式生成公众号文章 Markdown
  * 配图：粘贴/拖入/选择图片 → 压缩转 base64 内联；配置图床后自动上传换外链。
@@ -10,7 +10,6 @@
 
   var Shared = window.Md2GZHShared;
 
-  var DEFAULT_BASE = 'https://api.yituohub.com';
   var LS = {
     base: 'yth.create.base', key: 'yth.create.key', model: 'yth.create.model', topic: 'yth.create.topic',
     type: 'yth.create.type', length: 'yth.create.length',
@@ -86,9 +85,7 @@
   function toast(message) { Shared.toast(toastEl, message, 2600); }
 
   function apiBase() {
-    var value = (baseInput.value || DEFAULT_BASE).trim().replace(/\/+$/, '');
-    if (/\/v1$/i.test(value)) value = value.replace(/\/v1$/i, '');
-    return value || DEFAULT_BASE;
+    return Shared.normalizeApiBase(baseInput.value);
   }
 
   function apiKey() { return keyInput.value.trim(); }
@@ -112,9 +109,9 @@
 
   function persist() {
     try {
-      localStorage.setItem(LS.base, baseInput.value.trim() || DEFAULT_BASE);
+      localStorage.setItem(LS.base, apiBase());
       localStorage.setItem(LS.key, apiKey());
-      localStorage.setItem(LS.model, modelSelect.value || '');
+      localStorage.setItem(LS.model, modelSelect.value || state.savedModel);
       localStorage.setItem(LS.type, state.type);
       localStorage.setItem(LS.length, state.length);
       localStorage.setItem(LS.customType, customType.value.trim());
@@ -666,10 +663,10 @@
         saved[name] = localStorage.getItem(LS[name]) || '';
       });
     } catch (error) { Shared.warnOnce('localStorage 不可用，设置不再恢复', error); }
-    baseInput.value = saved.base || DEFAULT_BASE;
+    baseInput.value = Shared.normalizeApiBase(saved.base);
     keyInput.value = saved.key;
     topicInput.value = saved.topic;
-    state.savedModel = saved.model;
+    state.savedModel = saved.model || '';
     if (TYPES.some(function (item) { return item.id === saved.type; })) state.type = saved.type;
     if (LENGTHS.some(function (item) { return item.id === saved.length; })) state.length = saved.length;
     customType.value = saved.customType;
