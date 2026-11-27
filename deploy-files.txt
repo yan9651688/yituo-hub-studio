@@ -4,6 +4,8 @@
 index.html
 studio.html
 create.html
+LICENSE
+NOTICE
 favicon.svg
 landing.css
 styles.css

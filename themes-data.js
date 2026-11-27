@@ -2,7 +2,6 @@
  * original library: motion（基础排版，蓝梦原创视觉 16 套，原「高级排版」）
  * creative group: creative（基础排版中的静态创意主题）
  * RETIRED_SPECS：已下线的 18 套旧基础主题（editorial / classic / fresh）
- * classic 组的配色与下划线取自原版 gzh-design-skill，组件形态为参数化复刻。
  * 加载顺序要求：本文件必须在 themes.js 之前引入（见 studio.html）。
  */
 (function (global, factory) {
@@ -72,7 +71,16 @@
       c: { primary: '#DB2777', deep: '#9D174D', light: '#FBCFE8', tint: '#FDF2F8', ink: '#1F1723', text: '#4A3B47', sub: '#B294A9', border: '#F1E2EA', accent: '#E11D48', coverA: '#EC4899', coverB: '#BE185D', codeBg: '#FDF2F8' }
     },
 
-    /* ---------- 经典复刻（gzh-design-skill） ---------- */
+    /*! 经典复刻（classic）沿用以下项目的配色与下划线，组件形态为参数化复刻。
+     *
+     * gzh-design-skill — 微信公众号排版技能
+     * Copyright (C) 2026 甲木 (Jiamu) × 摸鱼小李 (Moyu Xiaoli)
+     *
+     * This program is free software: you can redistribute it and/or modify
+     * it under the terms of the GNU Affero General Public License as published by
+     * the Free Software Foundation, either version 3 of the License, or
+     * (at your option) any later version. See LICENSE for the full text.
+     */
     {
       id: 'moyu-green', name: '摸鱼绿', en: 'MOYU GREEN', kickerZh: '效率工具', group: 'classic',
       desc: '教程测评万能款',
