@@ -1,8 +1,11 @@
-gzh-design-skill — 微信公众号排版技能
-Copyright (C) 2026 甲木 (Jiamu) × 摸鱼小李 (Moyu Xiaoli)
+YI TUO HUB STUDIO · 公众号排版工坊
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version. See LICENSE for the full text.
+颜（yan9651688）负责排版引擎与产品体验。
+蓝梦（lanmengSakura）设计原创视觉与动效组件。
 
+本项目采用 GNU Affero General Public License 第 3 版或任何更高版本
+（AGPL-3.0-or-later），许可全文见 LICENSE。
+
+motion/ 中的动效组件版权归蓝梦所有，授权记录见 motion/AUTHORIZATION.md。
+历史主题配色与下划线的原始署名和许可见 themes-data.js 中的「经典复刻」段。
+首页雪山照片来自 Pexels。vendor/ 中的第三方库保留各自的许可声明。
